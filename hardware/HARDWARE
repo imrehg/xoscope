@@ -1,0 +1,134 @@
+
+
+
+
+	Sound card buffer circuit (buff.fig) for use with [x]oscope
+
+	by Tim Witham <twitham@pcocd2.intel.com>
+
+
+	NO WARRANTY
+
+THIS CIRCUIT IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+THE ENTIRE RISK AS TO THE QUALITY, PERFORMANCE AND SAFETY OF THE
+CIRCUIT IS WITH YOU.
+
+
+	HISTORY
+
+I was probing a circuit with a piece of wire to the line in on my
+sound card when I happened to notice that the probing was loading my
+circuit down.  This implies my sound card's line input may have less
+than ideal input impedance for looking at arbitrary signals.  I
+eliminated the loading by using a less intrusive 10x (10 times)
+attenuating oscilloscope probe.  But then the signal was too small to
+see on [x]oscope.  So, for fun, I actually built a little line in
+buffer circuit to solve these problems and more.
+
+
+	THE BUFFER CIRCUIT
+
+The result is shown in the file buff.fig (xfig source format) or
+buff.ps (postscript format).  The purpose of this circuit is to:
+
+1) Look like a real oscilloscope to the circuit under test.  That is,
+to have an input impedance of 1 Megohm in parallel with 20 pF.
+
+2) Have a x1 / x10 switchable amplifier to produce the same amplitude
+with 1x and 10x probes respectively.
+
+3) Provide a line level trim control for adjusting the amplitude to an
+optimum level for the sound card's input.
+
+4) Provide high voltage protection to the sound card and PC for those
+times when you accidentally probe your 60Hz line-voltage AC!
+
+The circuit accomplishes these goals.  It is adapted from part of a
+circuit shown in figure 4.74 of the excellent book "The Art of
+Electronics" by Paul Horowitz and Winfield Hill, 2nd ed., 1989.  Most
+of the parts can be purchased at your local electronics store for
+under $30.00; see the parts list below.  Two identical circuits are
+built, one for each of the sound card's left and right line inputs.
+
+
+	CIRCUIT EXPLANATION
+
+C1 is for AC coupling to remove any DC first.  R1 and C2 set the input
+impedance seen by the circuit.  In retrospect, C1 should probably have
+been on the other side of R1 and C2 so as to not affect the input
+impedance at all.  But it seems to work fine this way too.
+
+D1, D2 and R2 limit the input voltage to the range -12V to 12.7V for
+the high voltage input protection.  R2 must be 1/2 Watt for 150 Volt
+protection.  D3 and R3 produce a clamp voltage at -11.3V to keep the
+op-amp in common mode range.
+
+The TL082 is a dual JFET input op-amp providing the necessary high
+input impedance.  A similar JFET input part may work just as well.
+R5, R4 and S1 provide the x1 or x10 amplification.
+
+Finally, R6 is used to trim the output to an acceptable level for the
+soundcard. It can be brought all the way down to ground to get the
+same effect as the "GND" input coupling of a real oscilloscope.
+
+
+	ASSEMBLY AND CONNECTION
+
+See buff2.fig or buff2.ps for my circuit layout.  I built two of the
+circuits on the back of a full size drive bay cover.  The op-amp and
+surrounding components were mounted on a small circuit board (see
+pcb.fig / pcb.ps) positioned in the center of the drive bay cover.
+The BNC connectors, switches and potentiometers were mounted through
+the cover on either side of the circuit board.  The result is under
+1/2" thick so an internal drive can even fit behind it.
+
+A -12V power connector may not be readily available in your computer.
+The standard disk drive power connectors are +5 and +12.  I added an
+alternate power connector in my system by tapping my power supplies'
+-12, GND, and +12 wires.  Be careful not to get these mixed up!
+
+Finally, I used a Y adapter cord to connect the two phono jacks to the
+1/8" stereo line input on the sound card.
+
+
+	PARTS LIST
+
+Qty	Part#	Description
+
+1	IC1	TL082 Dual JFET input operational amplifier
+
+2	R1	1M,	1/4 Watt, 5% resistor
+2	R2	47k,	1/2 Watt, 5% resistor
+2	R3	4.7k,	1/4 Watt, 5% resistor
+2	R4	3k	1/4 Watt, 5% resistor
+2	R5	27k,	1/4 Watt, 5% resistor
+2	R6	100k,	linear potentiometer
+
+2	C1	.01uF, 1kV	ceramic disc capacitor
+2	C2	20pF		ceramic disc capacitor
+2	C3	100pF		ceramic disc capacitor
+
+6	D1-D3	1N914 or 1N4148 silicon switching diode
+
+2	S1	SPST mini toggle switch
+
+1		circuit board, (1/2 RS 276-159)
+1		8-pin DIP socket
+2		1/4" knob for R6
+2		female BNC connectors, panel mount
+2		female RCA connectors, in-line type
+		tap-in and power connectors
+		connecting wire, power wire
+
+
+	DISCLAIMER
+
+This circuit was designed and built by me on my own time and
+equipment.  My employer has absolutely nothing to do with it.
+
+
+If you have comments on this thing, please let me know.
+
+	Tim Witham <twitham@pcocd2.intel.com>

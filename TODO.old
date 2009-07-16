@@ -1,0 +1,351 @@
+	x*oscope mostly finished TODO list.
+
+	This file holds old TODOs that are mostly done, for historical
+	reference and status updates.  See the TODO file for
+	outstanding TODOs.
+
+2	single shot mode		(Jeff_Tranter@Mitel.Com)
+
+	This should be fairly easy to do and should be done.
+
+v1.2: DONE.  Use space bar to select `wait' mode, then the first
+trigger event will `stop' the scope.
+
+
+4	make drawing area mouse aware	(Jeff_Tranter@Mitel.Com)
+
+	Be able to drag signals up and down for example.
+
+v1.6: Under GTK+, left-click will select a channel and right-click
+is a context-sensitive pop-up menu.
+
+
+5	clean up the cluttered screen	(twitham@pcocd2.intel.com)
+
+	Tough to do unless I invent a smarter menu-driven interface.
+	And how do I do that on svgalib?  Maybe drop console support?
+	I could at least hide the (keys) and let them show up when you
+	hit a certain help key, say (?).  That's how freq does it.
+
+v1.2: DONE.  Just hit the `?' key to toggle.
+
+v1.3: now shows oscope version number.
+
+v1.5: GTK+ version now has an easy to use menu interface.
+
+v1.6: GTK+ now has context-sensitive pop-up tearable menus.
+
+
+
+6	X-Y mode			(Grant_Siemers@ccm.fm.intel.com)
+
+	To be of most use, X and/or Y should be able to come from
+	memory or math.  This could be an external command as
+	described in the external spectrum analyzer idea, #16.
+
+v1.2: DONE.  As an external command, hit `$' key and enter `xy'.
+
+v1.3: You can now use the `xy' command with memory buffers by simply
+recalling the recorded signals into channel 1 or 2 with `xy' running
+on an another channel.
+
+
+13	redefine external interface	(Sean_Eilert@ccm.fm.intel.com)
+
+	Let user decide which signals to pass to external command.
+	This lets you do math on memory or on other math.  Enables you
+	to ask questions like what is the difference between this
+	signal and a previous reference in memory?
+
+	There would need to be a command protocol established on the
+	pipe.  This could also mark the trigger points so externals
+	could "sync" correctly after window resizing.
+
+v1.3: DONE?  You can now do math (internal or external) on memory by
+simply recalling the recorded signals into channel 1 or 2.  This
+should be sufficient.
+
+
+14	redefine internal math		(twitham@pcocd2.intel.com)
+
+	Let internal math operate on arbitrary channels so you can do
+	math on references or on other math.
+
+v1.3: DONE?  You can now do math (internal or external) on memory by
+simply recalling the recorded signals into channel 1 or 2.  This
+should be sufficient.
+	
+
+16	external spectrum analyzer	(Sean_Eilert@ccm.fm.intel.com)
+
+	For xoscope, modify Philip VanBaren's xfreq to be an external
+	command, displaying the frequency domain in another window!
+	This idea could be used for X-Y also.  Of course it only works
+	with a windowing system (X11).
+
+v1.1: DONE.  Hit the `$' key and run `ofreq' on a channel.  See
+README.f51 for instructions on building ofreq from freq51.
+
+v1.4: Patch updated to work with ProbeScope by allowing 1kS/s to
+20MS/s sample rates and scaling the input to 8 bit range.
+
+
+17	no hard-wired inputs		(twitham@pcocd2.intel.com)
+
+	Disconnect the "hard-wiring" of Left and Right sound inputs to
+	channel 1 and 2.  Make all display channels equivalent.  This
+	could enable the sound card to become optional and make it
+	easier to add other types of input "devices" to any channel.
+
+v1.3: DONE?  Left and Right are now "hard-wired" to X and Y which can
+be "recalled" to any of the 8 display channels.  Channel 1 and 2 are
+still special since they're the input to the math functions.
+
+v1.4: DONE?  ProbeScope is "hard-wired" to Z and displayed on Channel
+3 by default.
+
+
+18	signal input from files		(twitham@pcocd2.intel.com)
+
+	Read input signal from a file and loop over it.  You could
+	generate perfect test signals in software, save them to files,
+	then use oscope to see them or do math on them.
+
+v1.3: DONE?  You could now write an oscope data file with the signals
+stored as columns (save one to see the format).  Then just recall the
+columns to channel 1 and/or 2 to show them and do math on them.
+
+v1.4: See also #26.
+
+
+19	serial "Probe Scope" input	(twitham@pcocd2.intel.com)
+
+	Radio Shack now has an affordable 20 MHz "Probe Scope" that
+	can send samples out a serial cable to PC software.
+	Unfortunately, it is only 6 bit.  It would still be fun and
+	useful to support it as an input device, assuming I could
+	figure out its' protocol.  Oscope would just multiply by 4 to
+	get to the 1:1 scale.  Of course the time scaling would also
+	need to be reworked.  Then oscope would be able to do 20 MHz!
+
+v1.3: I bought a Probe Scope.  The protocol is documented and and I'm
+making progress on this.  Most of this version's code rearranging was
+to make it easier to add Probe Scope support.  Hopefully this will be
+done by next release.
+
+v1.4: DONE.  ProbeScope is connected to Z and displayed on Channel 3
+by default.  You may recall it to Channel 1 to do math on it.  The
+6-bit resolution is multiplied by 5 to result in 0.1, 1, or 10 V/div.
+
+
+20	external command OSCOPEPATH	(twitham@pcocd2.intel.com)
+
+	Maybe oscope should look for external commands in known
+	directories so they don't have to be on the users' $PATH.
+	There could be a default that the user can override with an
+	environment variable.  This would simply modify the PATH
+	environment variable for the subprocesses.
+
+v1.1: DONE.  It is the LIBPATH in the Makefile.
+
+
+21	increase "horizontal resolution"	(twitham@pcocd2.intel.com)
+
+	When "zoomed in" on a high frequency signal, display pixels
+	are skipped, resulting in a lousy horizontal resolution of
+	roughly 25 micro seconds.  For repetitive signals, this could
+	be improved by "estimating" where the trigger really was and
+	shifting the signal an appropriate amount horizontally before
+	plotting.  In conjunction with dot accumulate, this would plot
+	more of the horizontal pixels and produce a cleaner picture.
+
+v1.1: DONE.  Oscope now remembers one sample before trigger and then
+internally "connects the dots" with a line to guess where the trigger
+really was.  Then the samples are shifted horizontally to place this
+time at the trigger point.
+
+v1.3: This shifting no longer applies to channels displaying memory
+buffers.  Since they are a single snapshot of samples, accumulation
+can't make them any more clear; it just "blurs" the display if they're
+shifted.  The shifting still applies to math since it can enhance the
+result if the math is being performed on one or both input signals.
+
+v1.4: Shifting also doesn't apply to ProbeScope since we don't get
+the necessary sample before trigger.
+
+
+22	increase time/div range		(twitham@pcocd2.intel.com)
+
+	Currently, the slowest sweep speed is 1 sample per pixel for
+	one screen full.  Slower sweeps could be done by skipping
+	samples, averaging, etc.  Will need to plot a fraction of the
+	screen then sample and plot more beyond the first, instead of
+	the current gather all, plot all loop.
+
+v1.3: Oscope can now skip samples but nothing fancier.
+
+v1.4: If we don't have enough sample depth for the screen, then only
+part of the screen is plotted.  This feature would never be useful for
+ProbeScope since we'll never have more than 128 samples past trigger.
+
+v1.8: DONE.
+
+
+24	port to other OSs		(twitham@pcocd2.intel.com)
+
+	Yack!  Might already work on other unixes.  I need to pull the
+	soundcard specifics out to a separate file like Philip did for
+	freq.  Display stuff is already fairly modular; just write a
+	new file like gr_sx.c or gr_vga.c.
+
+v1.3: The OS specifics are now in separate files.  sc_* is the sound
+card connection and gr_* is the display.  gr_grx.c is a working
+display port to DOS using DJGPP with GRX.  If you know how make a
+sound card record in stereo under DOS, feel free to finish sc_sb.c and
+let me know how you did it (I'd give you the credit of course).
+Please let me know if you port it to any OS; I have no time or
+incentive to do any further porting myself.
+
+v1.4: The serial connection to ProbeScope is implemented in ser_*.c.
+DOS port works but in mono only (Left == Right) due to my lack of
+ability to figure out how to do stereo recording.  But it demonstrates
+the portability of the code.
+
+v1.5: GTK+ port works great.  Apparently GTK+ is being ported to
+non-unix's so someday this may simplify ports to other OSs.
+
+
+26	sound pipe input device		(james@albion.glarp.com)
+
+	James Feeney suggested a variation to #18: the ability to send
+	an audio file or command output into a running oscope process.
+	This may be doable through /dev/dsp if it could be opened
+	non-exclusively.  Oscope or the player process would need to
+	work with the current sample rate instead of each trying to
+	set it.  Or this could be done through a named pipe (FIFO) in
+	the filesystem.  It can already sort of be done through the
+	external command interface.  A command could just disregard
+	the input and send a new signal in to one of Channel 3 - 8.
+
+v1.6: this is best done via ESD which lets many processes share the
+sound device.  Just esdplay (or whatever) a file through esd while
+xoscope is monitoring the sound.
+
+
+27	time/frequency and amplitude cursors	(twitham@pcocd2.intel.com)
+
+	Cursors similar to Radio Shack's ProbeScope software would be
+	useful.  A key could toggle them on/off like freq does, then
+	the keyboard would have an alternate layout to move them.  Of
+	course mouse support, #4, would be nicest.  The display could
+	replace the auto-measurements in this mode.
+
+v1.7: DONE.  Even with mouse support under GTK+!  They're positioned
+with Ctrl-keys, and ' turns them on/off, " resets them.
+
+
+28	Fix voltage measurements for ProbeScope	(twitham@pcocd2.intel.com)
+
+	Since I don't know the GND level of ProbeScope input, I didn't
+	bother to turn amplitude measurements into voltages.  The
+	peaks could be referenced to a level other than the center.
+	But, at least the peak-to-peak could read in literal volts.
+
+v1.8: DONE.
+
+
+29	Port to the GTK+ user interface on X.	(twitham@quiknet.com)
+
+v1.5: DONE.  Supports GTK+ 1.0 or higher.  Future releases will
+require GTK+ 1.2 or higher so that fancier things can be done in the
+menubar.  GTK+ versions less than 1.2 will no longer be supported
+after this release.
+
+v1.6: GTK+ 1.2 or better now required.  The drawing area is now
+context-sensitive to mouse clicks.
+
+31	Parallel port support (several people)
+
+	Use the parallel port as a digital input device.  This would
+	be nice with the new logic analyzer display of version 1.7.
+	http://www.circlemud.org/~jelson/software/parapin should make
+	this easier.  Polling from user space would not guarantee a
+	consistent sample rate.  More ideally, there would be a kernel
+	module device driver to do the sampling regularly and make the
+	bytes available through a file similar to /dev/dsp.
+
+v1.10: DONE.  RTAI required.
+
+35	Completely convert to GTK
+
+	Currently, we're only using GTK a little bit, and still have
+	a bunch of nuisance problems in the display handling code.
+	Having to support VGA basically defeats the purpose of
+	having a GUI library, so probably ditch svgalib compeletely,
+	implement the center display window as a widget, and everything
+	else is done with Glade.  Probably call this "xoscope 2",
+	because not only would it look at lot different, it'd now
+	be built around a widget, that should be put in a shared library,
+	that could be used in other applications.
+
+	What signals/methods should the widget have?
+
+	setgraticulemode(int);  /* OFF, IN FRONT / IN BACK, MAJOR / MINOR */
+	setgraticulecolor(Color);
+	setplotmode(int mode); /* POINT, STEP, LINE, ACCUMLATE ON/OFF */
+	assign(int channel, struct Signal *);
+	setcolor(int channel, Color);
+	setdigital(int channel, int bits); /* 0=analog; non-0=num of bits */
+	ADJUSTMENTS - per channel - vscale, hscale, voffset, hoffset
+	ADJUSTMENTS - global - vscale, hscale, voffset, hoffset
+	update();
+	CURSOR FUNCTIONS
+	cursor1_setpos(GtkWidget *, GdkEvent *, data);
+	cursor2_setpos(GtkWidget *, GdkEvent *, data);
+	cursor1_increment();
+	cursor2_increment();
+	QUERY CURSOR
+
+	Timebase - we want a uniform timebase; so we should set an
+	hscale for each signal, and also have a global hscale,
+	that could be continuously adjusted - like turning the
+	red timebase knob on my scope.  This seems to imply
+
+		SAMPLE VALUES  <--->  "TIME"  <--->  DISPLAY PIXELS
+	                      local adj      global adj
+
+	Likewise, a real scope has continuous vertical scale and position
+	adjustments for each channel.  So we have to have at least
+	local hscale settings, a global hscale adjustment, local
+	vscale adjustments, local vposition adjustments, a global
+	hposition adjustment.  The simplest and most general
+	way to deal with all these is to have both local and
+	global adjustments for all of hscale, vscale, hpos, and vpos.
+
+	The scale settings work like above - there's an intermediate
+	"time" that acts as a bridge between the local and global scales.
+
+	What units do we want the position adjustments in?
+
+	Cursors, too, seem like they should be adjustments.
+	What units do we want the cursors in?
+
+	Need to make sure we can map keyboard accelerators to any of:
+	reset adjustment(s) to zero; incr/decr adjustment by small/large step
+
+v2.0: DONE.  Don't have all of the little tidbits I envisioned, though.
+
+36	Scroll left/right across a signal too big to fit on the screen
+
+	This was requested on the sourceforge features request page.
+
+v2.0: DONE.
+
+37	Reduce size of executable!
+
+	As I right this, xoscope-1.11 clocks in at 5452 KB on my
+	Intel Linux system.  The "bloat", I'm convinced, comes
+	from the statically allocated data[] array in the Signal
+	structure.
+
+v2.0: DONE.  Executable is now 531 KB.

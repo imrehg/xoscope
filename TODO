@@ -1,0 +1,221 @@
+
+	x*oscope infinite TODO list, in rough order of suggestion
+
+	This is a the original text of (most) everything that's been
+	thought up or suggested along with my comments and any status
+	updates.  Things that are mostly done have now been moved to
+	TODO.old for historical reference.  I don't know how many of
+	the remaining ones will ever get done or if some of them are
+	even practical without major work.
+
+
+1	16 bit sampling			(Jeff_Tranter@Mitel.Com)
+
+	Oscope would just divide by 256 to show 1/1 scale.  The
+	obvious advantage to this is better clarity when you zoom in
+	on signals of small amplitude, or for use with x10 probes.
+	For math to work, the size of everything would need doubled
+	from 16 to 32 bits to avoid overflow.
+
+v1.1: I made a hardware solution for amplifying x10 probes.  See
+HARDWARE and buff.*.  16-bit would still be useful though.
+
+v1.10: COMEDI data source handles 16-bit devices, though math may
+still need to be fixed to avoid overflow
+
+
+3	envelope mode			(Jeff_Tranter@Mitel.Com)
+
+	This only applies at slower sweep speeds, right?  See #23.
+
+
+7	smarter maximum sample rate	(twitham@pcocd2.intel.com)
+
+	If your sound card can do greater than 44kHz, oscope won't
+	currently take advantage of it.  It should determine the
+	optimum rate at run-time.  I used 44kHz because it was the
+	most my card could do at a one sample per pixel screen
+	resolution.  But, for example, if your card can do 88kHz it
+	could plot every other sample until you zoom in to get 1:1.
+
+
+8	trigger on math or memory	(twitham@pcocd2.intel.com)
+
+	You could hide 1 and 2 and use an external command as input.
+	Also allows you to trigger when 1 equals 2 or whatever.
+
+	Problem - how to handle things like the Bitscope that
+	_have_ to have a trigger.  See #33.
+
+
+9	show pre-trigger samples	(twitham@pcocd2.intel.com)
+
+	Let user position trigger horizontally.  Remember samples
+	until we find trigger, then capture h_points - pos more.
+
+v1.4: Of course this wouldn't work with ProbeScope since we have no
+samples before trigger.
+
+
+10	external command history	(twitham@pcocd2.intel.com)
+
+	Remember previous commands and make them available in a list.
+	Possibly record them all to the data file.
+
+v1.6: GTK+ interface now has a combo box of useful commands.
+
+
+11	vertical scale calibration	(Grant_Siemers@ccm.fm.intel.com)
+
+	Ask user to apply a signal of known amplitude and use the
+	result to correctly label voltage on the Y axis.  I wonder how
+	many folks could actually do this?
+
+v1.4: ProbeScope voltage is labeled correctly, no calibration needed.
+
+v1.10: COMEDI voltage is labeled correctly, no calibration needed.
+
+
+12	channel colors			(Grant_Siemers@ccm.fm.intel.com)
+
+	Let user customize the colors of the channels.
+
+
+15	autosetup			(Sean_Eilert@ccm.fm.intel.com)
+
+	Auto-find one period and set the time scale appropriately.
+
+
+23	more acquisition modes		(twitham@pcocd2.intel.com)
+
+	With #22, we could do various modes like peak detect,
+	envelope, average.  I'm thinking all samples could really be
+	stored in memory in which case these would really be display
+	modes.  That is, how you see a combination of samples
+	represented at one horizontal pixel position on the screen.
+
+
+25	separate sample / display buffers	(twitham@pcocd2.intel.com)
+
+	Internally, collect samples in a different buffer and then
+	move them into a separate waveform buffer.  This would greatly
+	simplify implementation of several of the above features.
+
+v1.3: I've re-written the display routine to understand arbitrary
+sample rates.  Well, anything below 44000 for now.  So maybe this
+won't be necessary.
+
+v1.4: The display now works with rates up to 20,000,000 S/s.
+
+v1.8: The display now works with rates up to at least 25,000,000 S/s.
+
+
+30	BitScope support (www.bitscope.com)
+
+	I plan to write this in the year 2000 when I will finally have
+	time.
+
+v1.8: Well, 2000 blew by and I never got it done due to an unexpected
+life outside of computers.  So I won't put a date on it now.
+
+	The BitScope is a "Mixed Signal Capture Engine."  Way cool
+	programmable hardware that aquires data and makes it available
+	through a serial port.  With its 2 analog channels and 8
+	digital, it has the potential to turn xoscope into a real
+	combined digital scope and logic analyzer at up to 100 MHz!
+	My rough initial plan of attack is:
+
+	+ 2 way serial communications to the device
+
+	+ modularized programming and I/O functions
+
+	+ a new channel display mode that instead of drawing one
+	analog line draws 8 digital ones.  This way the existing
+	buffer memory capabilities will work for the LA too.
+
+v1.7: This display mode is now available; hit ` or ~ to change the
+number of bits displayed.
+
+	+ the keyboard interface may need replaced with some sort of
+	on-screen menu system to organize the many features, similar
+	to the menus of real DSOs.
+
+	+ this likely will be a separate configuration at build-time,
+	completely separate from soundcard and probeScope devices
+	since the hardware is so much more sophistocated.  In other
+	words, it will produce a separate program, for BitScope only.
+
+v1.8: Actually, now I think not.  But it will require GTK+ for a
+decent user interface.  I have used Glade to build a control dialog
+and believe this will work nicely.
+
+	Obviously this will not be trivial but will be very well worth
+	the effort.  Sorry I never had time to do it yet.  I am still
+	looking forward to using BitScope with xoscope on Linux.
+
+
+32	Improved display handling
+
+	Right now, the graticule (display grid) is re-drawn every time
+	the data changes.  Under X Windows, the display code could be
+	implemented using a bitmask to prevent the signal lines from
+	drawing over the graticule when it is in "over" mode.  In
+	"under" mode, the inverse bitmask could be used to "draw"
+	the signal lines only where the graticule is, using the
+	color of the graticule.  End result should be more efficient
+	X Windows performance.
+
+	On a psuedo-color (or svgalib) display, signal lines could
+	be drawn using reserved bits in a custom colormap,
+	removing the need for any special graticule handling at all.
+
+	Code could be smarter about figuring out which x-coordinates
+	have been erased, and only re-draw signal lines for those
+	coordinates, instead of redrawing entire signal lines.
+
+	Don't have to use backing pixmap unless we're in accumulate mode.
+
+
+33	Multi-threading
+
+	Some of the data sources (like Bitscope) tend to block and wait
+	for serial line operations.  An easy way to avoid this would be
+	to implement a multi-threaded data source interface, where the
+	data collection thread ran independant from the display thread.
+	Main problem I see here is synchronization between the main
+	thread and the data collection thread, especially at the end
+	of a sweep - you have to signal the main thread that data
+	is ready, then wait until everything in the main thread is
+	done processing the data before starting a second sweep.
+
+
+34	16-bit and digital triggering
+
+	Triggering code currently works well for 8-bit triggering
+	(the original soundcard design), but for 16-bit sources
+	and digital sources, not so well.  How to scale the trigger
+	values for 16-bit sources, and do something intellegent
+	with digital triggering sources?
+
+
+99	mini TODOs
+
+	new defaults - default device, default min update interval
+	Bitscope dialog - test it and finish it
+	memory utilization
+	figure out how to use stock buttons on Glade dialogs
+	count.dat
+	anti-jitter in COMEDI's rt_timer
+	max rate option in COMEDI's rt_timer
+	fix multi-sample scan delay in COMEDI's rt_timer
+	investigate RTAI scheduling issues - how badly do we need anti-jitter?
+	ability to resize to a small(er) window
+	COMEDI gain control
+	shouldn't lose display information when moving signal up/down
+	time scale normalization - when it's done and how
+	noise causing false triggers on 16-bit data sources
+	should we note clipping?  older versions did
+	COMEDI rate logic
+	make sure -m option works (screen size)
+	cursors - should always show same voltage left/right
+	cursors - move around if sampling rate on active channel changes

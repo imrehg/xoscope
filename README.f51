@@ -1,0 +1,98 @@
+
+
+	SUMMARY:
+
+xfreq is a spectrum analyzer program by Philip VanBaren.  If you have
+X11 this file will show you how to run both xoscope and xfreq together
+to see signals in the time and frequency domains simultaneously in two
+windows. Of course doing this will slow things down since Linux will
+need to split processing time across the two processes.  But it works
+quite well for repetitive signals.
+
+
+	WHAT YOU NEED:
+
+* The "freq51" distribution from sunsite.unc.edu or a mirror.
+
+	ftp://sunsite.unc.edu/pub/Linux/apps/sound/freqs/
+
+* "libsrgp" from the "srgp" distribution, also available at sunsite.
+
+	ftp://sunsite.unc.edu/pub/Linux/libs/X/
+
+	INSTALLATION:
+
+Patch xfreq so that it can run as an external "ofreq" math command
+from xoscope:
+
+* tar zxvf freq51.tar.gz
+
+* cd freq51/source
+
+* patch < /path/to/oscope/source/patch.f51
+
+* edit the "DEFINES" line of makefile.srgp_linux if you put your
+  ofreq.ini file somewhere other than /usr/local/lib/oscope/ofreq.ini
+
+* make -f makefile.srgp_linux clean
+
+* make -f makefile.srgp_linux dep
+
+* make -f makefile.srgp_linux all
+
+* cp -p xfreq /usr/local/bin	(or wherever you want xfreq)
+
+* ln -s /usr/local/bin/xfreq /usr/local/lib/oscope/ofreq
+  (fix the paths if necessary)
+
+
+	USAGE:
+
+You should now have a modified xfreq that has an option to use xoscope
+as a "soundcard input device".  Run `xfreq -h` to see the complete
+usage.  This new "ofreq" command can now be launched from xoscope as
+an external math command.
+
+By default, xfreq looks for a "freq.ini" file in the current directory
+for initial configuration.  When the new xfreq is launched with the
+name "ofreq", it will instead look for the ini file in the path
+specified in the makefile (/usr/local/lib/oscope/ofreq.ini).  This is
+so the needed parameters can be set correctly independent of where you
+happen to be running xoscope.  I have included an ofreq.ini file that
+sets the minimum parameters you will need to use when running ofreq
+from xoscope.  These are (with command-line equivalents):
+
+Soundcard: 2		(-C2)
+    To use xoscope (stdin/stdout pipe) as the "soundcard" input
+
+Sample rate: 44000	(-S44000)
+    Most likely sample rate.  You must use the same rate in both xoscope
+    and xfreq or the results will be wrong.
+
+FFT length:	512	(-F512)
+    The FFT length must be a power of 2 and less than xoscope's sample
+    depth (screen width).  Since xoscope's width is 640 by default,
+    512 is the best number to use.  If you use 1024 (the default), the
+    programs will hang as they wait for samples from each other.
+
+Background color: 0,0,0
+    To give xfreq a black background like xoscope.
+
+
+* Now start xoscope.
+
+* Select channel 3 or above and make it visible.
+
+* Hit '$' or click on "Extern..."
+
+* enter "ofreq" in the dialog.
+
+This should launch ofreq in a separate window, displaying the FFT of
+channel 1.  Now all the normal keys should work; hit 'h' to display
+what the keys are.  Use '[' to switch the input channel, 'x' and 'y'
+to change the axis scales, etc.  You will need to hit 'r' and correct
+the sampling rate if you change the sampling rate in xoscope.
+
+That's it!
+
+	Tim Witham <twitham@pcocd2.intel.com>

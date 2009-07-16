@@ -1,0 +1,415 @@
+diff -C 2 -P orig/freq.h source/freq.h
+*** orig/freq.h	Sun Mar 10 13:42:26 1996
+--- source/freq.h	Sat Jun  7 23:55:57 1997
+***************
+*** 1,3 ****
+! #define VERSION "v.5.1"
+  #define COPYRIGHT "1996"
+  
+--- 1,3 ----
+! #define VERSION "v.5.1.o2"
+  #define COPYRIGHT "1996"
+  
+***************
+*** 26,30 ****
+  
+  #ifdef DEBUG_OUTPUT
+!  #define DOUT(string) puts(string)
+  #else
+   #define DOUT(string) {}
+--- 26,30 ----
+  
+  #ifdef DEBUG_OUTPUT
+!  #define DOUT(string) fprintf(stderr, "%s\n", string)
+  #else
+   #define DOUT(string) {}
+***************
+*** 136,139 ****
+--- 136,142 ----
+    #define SC_LINUX 1
+   #endif
++  #ifdef OSCOPE
++   #define SC_OSCOPE 2
++  #endif
+  #else /* UNIX */
+   #define SC_SB8     0
+***************
+*** 152,155 ****
+--- 155,159 ----
+  #define SC_LINUX_NAME "LINUX"
+  #define SC_MULAW_NAME "MULAW"
++ #define SC_OSCOPE_NAME "OSCOPE"
+  
+  /* Default soundcard */
+***************
+*** 225,227 ****
+  #endif
+  
+! 
+--- 229,234 ----
+  #endif
+  
+! /* Function in SC_OSCOPE.C */
+! #ifdef SC_OSCOPE
+!   void init_oscope_sc(void);
+! #endif
+diff -C 2 -P orig/freq.c source/freq.c
+*** orig/freq.c	Sun Mar 10 13:42:24 1996
+--- source/freq.c	Sat Jun  7 23:55:57 1997
+***************
+*** 116,119 ****
+--- 116,120 ----
+  int barmode=1;          /* Flag for bar display or dot display */
+  int done=0;             /* Flag indicating program should exit*/
++ FILE *where;			/* where to send final messages */
+  
+  int main(int argc,char *argv[],char *environ[])
+***************
+*** 138,143 ****
+     else
+     {
+!       strncpy(ini_file,"freq.ini",sizeof(ini_file));
+!       first=1;
+     }
+  
+--- 139,149 ----
+     else
+     {
+! #ifdef SC_OSCOPE
+!      if (strstr(argv[0], "ofreq"))
+!        strncpy(ini_file, INIPATH, sizeof(ini_file));
+!      else
+! #endif
+!        strncpy(ini_file,"freq.ini",sizeof(ini_file));
+!      first=1;
+     }
+  
+***************
+*** 827,831 ****
+     cleanup_graphics();
+  
+!    printf("You have been using Freq " VERSION);
+  #ifdef SC_PAS16
+     if(Soundcard==SC_PAS16) printf(" in ProAudio Spectrum 16-bit mode.");
+--- 833,842 ----
+     cleanup_graphics();
+  
+!    where = stdout;
+! #ifdef SC_OSCOPE
+!    if(Soundcard==SC_OSCOPE)
+!      where = stderr;
+! #endif
+!    fprintf(where, "You have been using Freq " VERSION);
+  #ifdef SC_PAS16
+     if(Soundcard==SC_PAS16) printf(" in ProAudio Spectrum 16-bit mode.");
+***************
+*** 846,850 ****
+     if(Soundcard==SC_MULAW) printf(" in 8-bit mu-law audio driver mode.");
+  #endif
+!    puts("\nCopyright (C) " COPYRIGHT " Philip VanBaren");
+     return(0);
+  }
+--- 857,864 ----
+     if(Soundcard==SC_MULAW) printf(" in 8-bit mu-law audio driver mode.");
+  #endif
+! #ifdef SC_OSCOPE
+!    if(Soundcard==SC_OSCOPE) fprintf(where, " in 8-bit xoscope pipe mode.");
+! #endif
+!    fprintf(where, "\nCopyright (C) " COPYRIGHT " Philip VanBaren\n");
+     return(0);
+  }
+diff -C 2 -P orig/makefile.srgp_linux source/makefile.srgp_linux
+*** orig/makefile.srgp_linux	Sun Mar 10 13:42:26 1996
+--- source/makefile.srgp_linux	Sat Jun  7 23:55:57 1997
+***************
+*** 38,42 ****
+  INCLUDE=
+  
+! DEFINES=-DUNIX -DLINUX_MIXER -DSRGP
+  
+  # order is important
+--- 38,42 ----
+  INCLUDE=
+  
+! DEFINES=-DUNIX -DLINUX_MIXER -DSRGP -DOSCOPE  '-DINIPATH="/usr/local/lib/oscope/ofreq.ini"'
+  
+  # order is important
+***************
+*** 45,49 ****
+  CC=gcc $(DEBUG) $(OPT) $(DEFINES) $(INCLUDE) $(FLAGS) 
+  
+! FREQOBJS=freq.o procinp.o setupsub.o realfft.o passdata.o sc_linux.o sc_mulaw.o gr_srgp.o
+  FREQSRCS=$(FREQOBJS:.o=.c)
+  
+--- 45,49 ----
+  CC=gcc $(DEBUG) $(OPT) $(DEFINES) $(INCLUDE) $(FLAGS) 
+  
+! FREQOBJS=freq.o procinp.o setupsub.o realfft.o passdata.o sc_oscope.o sc_linux.o sc_mulaw.o gr_srgp.o
+  FREQSRCS=$(FREQOBJS:.o=.c)
+  
+diff -C 2 -P orig/procinp.c source/procinp.c
+*** orig/procinp.c	Sun Mar 10 13:42:26 1996
+--- source/procinp.c	Mon Jun  2 18:00:39 1997
+***************
+*** 554,558 ****
+        else if(c=='R' || c=='r') /* Change the sampling rate */
+        {
+! 	 char in[6];
+  	 draw_bar(WINDOW_LEFT-5,MGY-1,WINDOW_RIGHT+5,MGY+_font_height,0);
+  	 draw_text_left(MGX-80,MGY,"Sampling rate: ");
+--- 554,558 ----
+        else if(c=='R' || c=='r') /* Change the sampling rate */
+        {
+! 	 char in[9];
+  	 draw_bar(WINDOW_LEFT-5,MGY-1,WINDOW_RIGHT+5,MGY+_font_height,0);
+  	 draw_text_left(MGX-80,MGY,"Sampling rate: ");
+***************
+*** 565,570 ****
+  
+  	    SampleRate=atol(in);
+! 	    if(SampleRate<5000L) SampleRate=5000L;
+! 	    if(SampleRate>88200L) SampleRate=88200L;
+  
+  	    reset_soundcard();
+--- 565,570 ----
+  
+  	    SampleRate=atol(in);
+! 	    if(SampleRate<1000L) SampleRate=1000L;
+! 	    if(SampleRate>20000000L) SampleRate=20000000L;
+  
+  	    reset_soundcard();
+diff -C 2 -P orig/sc_oscope.c source/sc_oscope.c
+*** orig/sc_oscope.c	Wed Dec 31 16:00:00 1969
+--- source/sc_oscope.c	Sat Jun  7 23:58:48 1997
+***************
+*** 0 ****
+--- 1,127 ----
++ /*
++  *  Routines for sampling from stdin/stdout pipe to xoscope
++  *
++  *  Copyright (C) 1996  Tim Witham <twitham@pcocd2.intel.com>
++  *
++  *  This program is free software; you can redistribute it and/or modify
++  *  it under the terms of the GNU General Public License as published by
++  *  the Free Software Foundation; either version 2 of the License, or
++  *  (at your option) any later version.
++  *
++  *  This program is distributed in the hope that it will be useful,
++  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++  *  GNU General Public License for more details.
++  *
++  *  You should have received a copy of the GNU General Public License
++  *  along with this program; if not, write to the Free Software
++  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++  */
++ 
++ #include "freq.h"
++ 
++ #ifdef SC_OSCOPE
++ 
++ #include <stdio.h>
++ #include <stdlib.h>
++ #include <unistd.h>
++ #include <fcntl.h>
++ #include <sys/soundcard.h>
++ #include <sys/ioctl.h>
++ #include "extern.h"
++ 
++ /* Function prototypes */
++ void reset_oscope_sc(void);
++ void halt_oscope_sc(void);
++ void cleanup_oscope_sc(void);
++ void recordblock_oscope_sc(void *buffer);
++ void set_mixer_oscope_sc(int mix,int level);
++ 
++ int channel_oscope_sc=0;	/* input channel, changed by "mixing" */
++ 
++ void init_oscope_sc(void)
++ {
++    DOUT("Setting up soundcard pointers");
++    reset_soundcard=reset_oscope_sc;
++    halt_soundcard=halt_oscope_sc;
++    cleanup_soundcard=cleanup_oscope_sc;
++    recordblock=recordblock_oscope_sc;
++    set_mixer=set_mixer_oscope_sc;
++    mixers=1;
++    mic_level=1;
++ 
++    /* If the audio device (sample depth) is undefined, define the default */
++    if(audio_device==NULL)
++       audio_device="640";
++ 
++    DOUT("Setting the DSP device bits per sample to 8");
++    sample_size=8;
++ }
++ 
++ void reset_oscope_sc(void)
++ {
++    int i;
++ 
++    DOUT("Initializing the buffers");
++    /* Reset the buffer pointers */
++    queue_buffer=0;     /* Pointer to next buffer to be queued */
++    record_buffer=0;    /* Pointer to next buffer to be filled */
++    process_buffer=0;   /* Pointer to next buffer to be FFTed  */
++ 
++    for(i=0;i<BUFFERS;i++)
++       flag[i]=0;
++    /*
++     *  This function starts the DMA process.
++     */
++    recordblock_oscope_sc(buffer[queue_buffer]);
++    if(++queue_buffer>=BUFFERS)
++       queue_buffer=0;
++ }
++ 
++ 
++ void halt_oscope_sc(void) {}
++ 
++ void cleanup_oscope_sc(void) {}
++ 
++ void recordblock_oscope_sc(void *buffer)
++ {
++   static int i, j, samples_per_screen;
++   static unsigned char FAR *in, *inmax; /* signal I/O buffers and pointers */
++   static short buff, out=0;
++ 
++   in = buffer;
++   inmax = buffer + fftlen;
++   samples_per_screen = atoi(audio_device);
++   for (j=0 ; j<samples_per_screen ; j++) {
++     if ((i = read(0, &buff, sizeof(short))) != sizeof(short))
++       exit(i);
++     if (!channel_oscope_sc)	/* grab channel 1 ... */
++       *(in++) = buff * 100 / 125 + 128;
++     if ((i = read(0, &buff, sizeof(short))) != sizeof(short))
++       exit(i);
++     if (channel_oscope_sc)	/* ... or channel 2 */
++       *(in++) = buff * 100 / 125 + 128;
++     if (in >= inmax) {
++       in = inmax;
++       /* Toggle the buffer-filled flag */
++       if(!flag[record_buffer]) {
++ 	flag[record_buffer]=1;
++ 	if (++record_buffer>=BUFFERS)
++ 	  record_buffer=0;
++       }
++     }
++     if ((i = write(1, &out, sizeof(short))) != sizeof(short))
++       exit(i);
++   }
++ }
++ 
++ /* "mixing" in this context means toggle channel 1 or 2 as the input */
++ void set_mixer_oscope_sc(int mix,int level)
++ {
++    DOUT("Setting the oscope input channel");
++    channel_oscope_sc = !channel_oscope_sc;
++    mic_level=channel_oscope_sc + 1;
++    update_header();
++ }
++ 
++ #endif /* SC_OSCOPE */
+diff -C 2 -P orig/setupsub.c source/setupsub.c
+*** orig/setupsub.c	Sun Mar 10 13:42:26 1996
+--- source/setupsub.c	Sat Jun  7 23:55:58 1997
+***************
+*** 362,367 ****
+--- 362,372 ----
+                   puts("-Cnumber selects the soundcard (0=SB, 1=PAS, 2=VESA, 3=SB16).");
+                #else /* UNIX */
++               #ifdef SC_OSCOPE
++                  puts("-Cnumber selects the soundcard (0=AU, 1=DSP 2=OSCOPE).");
++ 		 puts("-Ddevice selects the DSP device, or # of samples per screen width w/-C2.");
++               #else /* SC_OSCOPE */
+                   puts("-Cnumber selects the soundcard (0=AU, 1=DSP).");
+  		 puts("-Ddevice selects the DSP device.");
++               #endif /* SC_OSCOPE */
+  		 puts("-Xdevice selects the Mixer device.");
+                #endif /* UNIX */
+***************
+*** 438,443 ****
+     if(ys<0.01) ys=0.01;
+  
+!    if(SampleRate>88200L) SampleRate=88200L;
+!    if(SampleRate<5000L) SampleRate=5000L;
+  
+     if(fftlen<8) fftlen=8;
+--- 443,448 ----
+     if(ys<0.01) ys=0.01;
+  
+!    if(SampleRate>20000000L) SampleRate=20000000L;
+!    if(SampleRate<1000L) SampleRate=1000L;
+  
+     if(fftlen<8) fftlen=8;
+***************
+*** 479,482 ****
+--- 484,491 ----
+        init_mulaw_sc();
+  #endif
++ #ifdef SC_OSCOPE
++    if(Soundcard==SC_OSCOPE)
++       init_oscope_sc();
++ #endif
+     if(reset_soundcard==NULL)
+     {
+***************
+*** 501,504 ****
+--- 510,516 ----
+           printf("  %s (%d)\n",SC_LINUX_NAME,SC_LINUX);
+        #endif
++       #ifdef SC_OSCOPE
++          printf("  %s (%d)\n",SC_OSCOPE_NAME,SC_OSCOPE);
++       #endif
+        exit(1);
+     }
+***************
+*** 548,551 ****
+--- 560,567 ----
+           return SC_LINUX;
+     #endif
++    #ifdef SC_OSCOPE
++       if(strncmp(name,SC_OSCOPE_NAME,strlen(SC_OSCOPE_NAME))==0)
++          return SC_OSCOPE;
++    #endif
+     return(-1); /* If none match, return failure */
+  }
+***************
+*** 1120,1125 ****
+     if(mixers)
+     {
+!       sprintf(ach,"Mic:%3d  Ext:%3d  CD:%3d",mic_level,ext_level,int_level);
+!       draw_text_left(LVX,LVY,ach);
+     }
+  }
+--- 1136,1146 ----
+     if(mixers)
+     {
+! #ifdef SC_OSCOPE
+!      if (Soundcard==SC_OSCOPE)
+!        sprintf(ach,"   xoscope channel %d   ",mic_level);
+!      else
+! #endif
+!        sprintf(ach,"Mic:%3d  Ext:%3d  CD:%3d",mic_level,ext_level,int_level);
+!      draw_text_left(LVX,LVY,ach);
+     }
+  }
+***************
+*** 1160,1164 ****
+           draw_text_left(36,74,"'C' Toggle B&W/color display");
+           draw_text_left(340,62,"'V' Refresh display");
+!          draw_text_left(300,74,"(),[],{} Adjust mic,ext,CD input level");
+        }
+        else
+--- 1181,1190 ----
+           draw_text_left(36,74,"'C' Toggle B&W/color display");
+           draw_text_left(340,62,"'V' Refresh display");
+! #ifdef SC_OSCOPE
+! 	 if (Soundcard==SC_OSCOPE)
+! 	   draw_text_left(300,74,"(),[],{} Toggle xoscope input channel ");
+! 	 else
+! #endif
+! 	   draw_text_left(300,74,"(),[],{} Adjust mic,ext,CD input level");
+        }
+        else

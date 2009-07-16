@@ -1,0 +1,51 @@
+
+Recent work (since release 1.10) by Brent Baccala <cosine@freesoft.org>
+
+Oscope/Xoscope was written by Tim Witham <twitham@quiknet.com>, known
+as <twitham@pcocd2.intel.com> back in 1995 when development began.
+
+Oscope was originally based on "scope" by Jeff Tranter
+<Jeff_Tranter@Mitel.COM>.  Oscope is released under the conditions of
+the GNU General Public License.  See the files README and COPYING in
+the distribution for details.
+
+
+	CREDITS:
+
+Thanks to:
+
+Jeff Tranter <Jeff_Tranter@Mitel.com> for writing the original
+scope-0.1 that inspired all this.
+
+Philip VanBaren <phillipv@eecs.umich.edu> for the realfft.c code from
+his freq program.  If you want a Spectrum Analyzer, you should get
+Philip's freq program and read README.f51.
+
+The many folks working on the way cool GTK+.
+
+The Cthugha-L program (Torps Productions, Harald Deischinger
+<k3096e5@c210.edvz.uni-linz.ac.at>) for inspiring the X11 client and
+some coding ideas.
+
+Dominic Giamapolo <dbg@sgi.com> for libsx which made the original X11
+client possible.
+
+Mitch D'Souza <Mitch@Dubai.Sun.COM> for libvgamisc which makes the
+16-color console text possible (from his "g3vga").
+
+For the DOS port, DJ Delorie (dj@delorie.com) for DJGPP and to Charles
+W Sandmann (sandmann@clio.rice.edu) for CWSDPMI which together allow
+the 32 bit code to work on DOS.  To Gerhard Kordmann
+(kordmann@ldv01.Uni-Trier.de) for sb02.zip which made the sound card
+work.  And to Sam Vincent (svincent@cs.sonoma.edu) for svasync.zip
+which made the serial connection to ProbeScope possible.
+
+Dave J. Andruczyk <dave@techdev.buffalostate.edu> for the initial
+tweaks to make a connection to EsounD.
+
+Bruce Tulloch <bruce@bitscope.com> and Norman Jackson
+<normj@discrete.net> for the way cool open BitScope hardware and the
+wonderful Programmer's guide.
+
+Ingo Cyliax <cyliax@ezcomm.com> for initial code to work with the
+bitscope.

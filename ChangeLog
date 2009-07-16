@@ -1,0 +1,1212 @@
+2005-06-28  Brent Baccala  <baccala@freesoft.org>
+
+	* Makefile.in, config.h.in: getting configure to work for 1.12
+
+	* Makefile.in, configure, configure.in: version number change
+
+	* comedi-glade-src/callbacks.c, comedi.c, config.h.in, display.c, display.h, func.h, oscope.h, sc_linux.c, sc_linux_gtk.c, xy.c, Makefile.in:
+	little patches to eliminate compiler warning messages
+
+2005-06-24  Brent Baccala  <baccala@freesoft.org>
+
+	* configure: auto generated files from the last configure.in update
+
+	* configure.in: still trying to fix configure!
+
+	think I got the autoconf tests to propagate into automake correctly now
+
+2005-06-23  Brent Baccala  <baccala@freesoft.org>
+
+	* comedi.c:
+	fix to figure out zero values correctly for unipolar COMEDI cards
+
+	* oscope.h, proscope.c, sc_linux.c, INTERNALS, TODO, bitscope.c, comedi.c, display.c:
+	added set_width() function to data sources
+
+	* comedi.c: changes COMEDI command handling
+	instead of trying to use the library's generic_timed routine,
+	  we try three different commands setups of our own
+
+2004-11-04  Brent Baccala  <baccala@freesoft.org>
+
+	* comedi-glade-src/Makefile.in, bitscope-glade-src/Makefile.in, sc_linux.c, sc_linux_gtk.c, aclocal.m4, config.h.in, configure, configure.in, display.c, file.c, oscope.c, Makefile.in:
+	xoscope-1.11 release
+
+	really just applying a bunch of patches (a bug-fix release)
+
+2003-06-30  Brent Baccala  <baccala@freesoft.org>
+
+	* README.parport, comedi-parport.patch:
+	updated info on using COMEDI with parport
+
+	* TODO: updated todo list - mini-TODO
+
+	* Makefile.in, comedi.c, config.h.in:
+	bug fix in comedi.c - get channel ordering right
+
+2003-06-25  Brent Baccala  <baccala@freesoft.org>
+
+	* display.c, comedi.c:
+	Fixed little bug that could cause analog signals to display as digital
+	when using COMEDI
+
+2003-06-20  Brent Baccala  <baccala@freesoft.org>
+
+	* display.c: bug fix
+
+2003-06-19  Brent Baccala  <baccala@freesoft.org>
+
+	* INTERNALS, Makefile.in, aclocal.m4, bitscope.c, comedi.c, config.h.in, configure, oscope.c, oscope.h, proscope.c, sc_linux.c:
+	removed open and close functions from the data sources
+
+	also, added split_field helper function for displaying error messages
+
+2003-06-17  Brent Baccala  <baccala@freesoft.org>
+
+	* INTERNALS, README.parport: New files for 1.10:
+	  internals documentation
+	  readme for how to use parallel port with xoscope
+
+	* TODO, TODO.old: updated TODO files for xoscope 1.10
+
+	* Makefile.in, acconfig.h, bitscope-glade-src/Makefile.in, bitscope.c, bitscope.h, com_gtk.c, com_gtk.h, comedi-glade-src/Makefile.am, comedi-glade-src/Makefile.in, comedi-glade-src/README, comedi-glade-src/callbacks.c, comedi-glade-src/callbacks.h, comedi-glade-src/interface.c, comedi-glade-src/interface.h, comedi-glade-src/support.c, comedi-glade-src/support.h, comedi.c, comedi.glade, config.h.in, configure, configure.in, display.c, display.h, fft.c, file.c, func.c, func.h, gr_com.c, gr_gtk.c, gr_vga.c, oscope.c, oscope.h, proscope.c, proscope.h, sc_linux.c, sc_linux_gtk.c, ser_dos.c, ser_unix.c, xy.c, xy_gtk.c, Makefile.am:
+	Biiiig update - baccala's changes 1.8 -> 1.10
+
+	Main things -
+
+	  COMEDI support
+	  Display code rewrite (improved X performance)
+	  New modular data sources
+
+	* bitscope-glade-src/Makefile.in, bitscope-glade-src/interface.c, bitscope-glade-src/support.c, Makefile.am, bitscope.glade:
+
+	updated various files to reflect new location of bitscope glade subdir
+	  (now bitscope-glade-src instead of src)
+
+	new bitscope glade file has a 'connection' panel and no 'time' panel
+
+2002-06-15  Timothy Witham  <twitham@surewest.net>
+
+	* bitscope-glade-src/Makefile.in, Makefile.am, Makefile.in, README, acconfig.h, aclocal.m4, bitscope.c, config.h.in, configure, configure.in, gr_vga.c, oscope.c, sc_linux.c:
+	fixed vga detection and other build-time problems
+
+2001-05-25  Timothy Witham  <twitham@surewest.net>
+
+	* configure, configure.in:
+	Fixed bug that it tried to build oscope even if you didn't have
+	svgalib.
+
+2001-05-22  Timothy Witham  <twitham@surewest.net>
+
+	* bitscope-glade-src/Makefile.am, bitscope-glade-src/Makefile.in, bitscope-glade-src/callbacks.c, bitscope-glade-src/callbacks.h, bitscope-glade-src/interface.c, bitscope-glade-src/main.c, Makefile.am, Makefile.in, bitscope.glade, config.h.in, configure, configure.in, gr_gtk.c, oscope.1:
+	Connected the new bitscope dialog to the main menubar.
+
+2001-05-20  Timothy Witham  <twitham@surewest.net>
+
+	* oscope.c: Fixed bug: C-w didn't work right.
+
+	* Makefile.am, Makefile.in, bitscope-glade-src/Makefile.am, bitscope-glade-src/Makefile.in, bitscope-glade-src/callbacks.c, bitscope-glade-src/callbacks.h, bitscope-glade-src/interface.c, bitscope-glade-src/interface.h, bitscope-glade-src/main.c, bitscope-glade-src/support.c, bitscope-glade-src/support.h, bitscope.glade, config.h.in, configure, configure.in:
+	Added bitscope dialog that was generated by glade.  So far it's a
+	standalone program, not yet connected to xoscope.
+
+	* ChangeLog, Makefile.in, config.h.in: For 1.8.
+
+2001-05-19  Timothy Witham  <twitham@surewest.net>
+
+	* ChangeLog, Makefile.in, NEWS, bitscope.c, config.h.in: For 1.8.
+
+2001-05-09  Timothy D. Witham  <twitham@quiknet.com>
+
+	* acconfig.h, AUTHORS, ChangeLog, config.h.in, configure, configure.in, Makefile.am, Makefile.dos, Makefile.in, NEWS, oscope.1, oscope.lsm, README, TODO, TODO.old:
+	Updated the documentation.
+
+2001-05-06  Timothy D. Witham  <twitham@quiknet.com>
+
+	* INSTALL, install-sh, missing, mkinstalldirs, acconfig.h, aclocal.m4, audio.dat, AUTHORS, bitscope.c, bitscope.dat, config.h, config.h.in, configure, configure.in, COPYING, dirlist.c, display.c, freq.c, func.c, gr_com.c, gr_grx.c, gr_gtk.c, gr_sx.c, gr_vga.c, Makefile, Makefile.am, Makefile.dos, Makefile.in, NEWS, operl, operl.in, oscope.c, oscope.h, sc_linux.c, ser_unix.c, stamp-h.in, xy_sx.c:
+	Used autoconf and automake to switch to a GNU-style fully-automated
+	`./configure; make' build and distribution process.
+
+2000-12-06  Timothy D. Witham  <twitham@quiknet.com>
+
+	* sc_linux.c:
+	ESD was wrapping and overwriting the samples before we could get them
+	read, causing discontinuities in the display.  So now we flush all
+	samples before looking for trigger to start with a free buffer that we
+	can read before it wraps.
+
+2000-08-31  Timothy D. Witham  <twitham@quiknet.com>
+
+	* bitscope.c, bitscope.dat, bitscope.h, file.c, oscope.c:
+	Added -o for saving bitscope registers in the file.  Now using mode 1
+	alt which refreshes slower because it always has to read at least half
+	the sample memory to get to the second channel.
+
+2000-07-18  Timothy D. Witham  <twitham@quiknet.com>
+
+	* gr_gtk.c:
+	Left mouse button now decreases scale, position, bits, mode while
+	middle button increases.  Right button still pops-up the menu.
+
+	* gr_gtk.c:
+	Mouse cursors are now draggable which simplifies usage.
+
+	* bitscope.c, bitscope.h:
+	Generalized bs_read_async so it can be used for triggering in addition
+	to sample gathering.  Now neither block the interface!
+
+	* bitscope.c, bitscope.h, oscope.c:
+	Can now interactively change mode 4 sample rate: 1582 - 50000 S/s.
+
+2000-07-17  Timothy D. Witham  <twitham@quiknet.com>
+
+	* bitscope.c:
+	Mode 4 support that pretty much works.
+
+2000-07-14  Timothy D. Witham  <twitham@quiknet.com>
+
+	* bitscope.c:
+	Added M command support for BC > 110.  This is much faster than S.
+
+	* bitscope.c, bitscope.dat, bitscope.h, display.c, oscope.c:
+	Added x1/x10 probe support and corresponding channel labels.
+
+2000-07-11  Timothy D. Witham  <twitham@quiknet.com>
+
+	* bitscope.c, bitscope.h, display.c, file.c, func.c, oscope.c, oscope.h, proscope.c, proscope.h:
+	Added voltages to the signals in units of millivolts per +/- 160
+	(default screen height and max deflection of any scope (ProbeScope)).
+	Added real voltage labels to the channels and measurements.
+
+2000-07-10  Timothy D. Witham  <twitham@quiknet.com>
+
+	* display.c, file.c, func.c, gr_gtk.c, gr_sx.c, oscope.c:
+	Added step display modes.  Speed up display by remembering only the
+	samples currently displayed, for erasing next time.
+
+2000-07-07  Timothy D. Witham  <twitham@quiknet.com>
+
+	* bitscope.c, oscope.c:
+	Switch to free-running don't care trigger.  Better BitScope
+	recognition by making sure the serial read queue is clear before
+	sending ?.  Faster cursor movements from the keyboard.
+
+	* bitscope.c, bitscope.dat, ChangeLog, display.c, oscope.c, proscope.c, ser_dos.c:
+	Give the ser_dos.c a hope of working by actually implementing read
+	*and* write.  Lacking a DOS machine, I have no idea if it works or
+	not.  But it cross-compiles OK under Linux.
+
+2000-07-06  Tim Witham  <twitham@quiknet.com>
+
+	* bitscope.c, config.h, display.c, file.c, func.c, oscope.c, oscope.h, sc_linux.c:
+	Allow up to 2 sec/div time scale!  This is most useful with 8000 S/s
+	audio sampling to see lots of time.  All buffers increased to 256K to
+	handle this.  Memories now store time zero to current display point.
+	File length is now as long as the longest sample stored in memory.
+
+	* oscope.h, sc_linux.c, audio.dat, bitscope.c, bitscope.h, display.c, oscope.c:
+	Allow soundcard to collect enough samples to fill any display length
+	by letting it collect parallel to disply like bitscope does.
+
+	* bitscope.c, display.c, func.c, oscope.c, oscope.h:
+	Enhanced math to work on the number of samples displayed instead
+	h_points.  External math is still a constant though.  Enhanced some
+	display strings.
+
+2000-07-05  Tim Witham  <twitham@quiknet.com>
+
+	* bitscope.c, bitscope.dat, bitscope.h:
+	BitScope serial data is now grabbed and processed in parallel with
+	display refreshing, greatly improving interactive response time.  You
+	can actually see the data being read in real-time.
+
+	* bitscope.c, config.h, display.c, file.c, func.c, oscope.h, sc_linux.c:
+	Snag only enough samples to fill the display.
+
+2000-07-03  Tim Witham  <twitham@quiknet.com>
+
+	* bitscope.c, bitscope.dat, display.c, Makefile, oscope.c:
+	First attempt at ALT dual trace to get both A & B.
+
+	* bitscope.c, bitscope.h, config.h, display.c, file.c, gr_gtk.c, Makefile, oscope.c, proscope.c, proscope.h, ser_dos.c, ser_unix.c:
+	First connection of BitScope, partly based on code submitted by Ingo
+	Cyliax.  If a BitScope is identified, it is used exclusively, turning
+	off sound and ProbeScope input devices.  It connects BitScope Channel
+	A, B and LA to X, Y and Z respectively.
+
+2000-07-01  Tim Witham  <twitham@quiknet.com>
+
+	* x11.h, xdisplay.c:
+	Tossed obsolete files.
+
+2000-06-28  Tim Witham  <twitham@quiknet.com>
+
+	* ChangeLog oscope.lsm, README, Makefile, TODO, TODO.old: For 1.7.
+
+	* count.dat: New file.
+
+	* display.c:
+	Draw screen before opening sound device to give user a clue what's
+	going on if it blocks waiting for ESD sound (? TRIGGER ?).
+
+	* gr_gtk.c:
+	Fixed bug: mouse click context (e.g. memory selection) was wrong for
+	arbitrary window sizes due to integer division rounding errors.
+
+2000-05-20  Tim Witham  <twitham@quiknet.com>
+
+	* oscope.1, oscope.c, file.c:
+	Added manually-positioned measuring cursors.
+
+	* config.h: *** empty log message ***
+
+	* gr_gtk.c, display.c, func.c, oscope.h:
+	Added manually-positioned measuring cursors.
+
+2000-04-21  Tim Witham  <twitham@quiknet.com>
+
+	* display.c:
+	Scaled LA down so all 16 bits fit on the display at 1/1 default scale.
+
+2000-04-08  Tim Witham  <twitham@quiknet.com>
+
+	* gr_gtk.c, oscope.1, file.c, oscope.h, oscope.c, display.c:
+	Added logic analyzer display.  The least significant bits of a channel
+	can be displayed as ditial lines.  The number of bits shown can be
+	increased and decreased with the ~/` key.  Zero bits draws the signal
+	as one analog line as before.
+
+2000-03-24  Tim Witham  <twitham@quiknet.com>
+
+	* sc_linux.c:
+	Fixed off-by-one error so silence has level 0 instead of -1.
+
+2000-03-05  Tim Witham  <twitham@quiknet.com>
+
+	* ChangeLog, README, oscope.lsm, oscope.1, oscope.h, Makefile, config.h, file.c, audio.dat, proscope.dat:
+	For 1.6.
+
+	* com_gtk.h: Eliminate compiler warning caused by dimensionless arrays.
+
+	* oscope.c: Fix command halting and a few minor enhancements.
+
+	* func.c:
+	Fixed bug: switching from external to memory didn't halt external.
+
+	* gr_gtk.c:
+	Added way-cool context-sensitive pop-up menus.  Also added DMA menu.
+
+2000-03-04  Tim Witham  <twitham@quiknet.com>
+
+	* func.c: Added EXTSTOP for shutting down external commands.
+
+	* gr_gtk.c:
+	Enhanced external math dialog with combo box of pre-defined commands.
+
+2000-03-03  Tim Witham  <twitham@quiknet.com>
+
+	* com_gtk.c:
+	Added fixing_widgets boolean which prevents infinite event loops.
+
+	* display.c:
+	Draw text above and below the graticule once a second in case it got
+	scribbled through by the signals.
+
+2000-03-01  Tim Witham  <twitham@quiknet.com>
+
+	* sc_linux.c:
+	Use the otherwise useless DMA to control whether the esd is opened to
+	block (4) or not (2 or 1).  Also, copy only the samples that were
+	successfully read, leaving the rest of the buffer from last run.
+	Should probably warn the user when such underruns are happening.
+
+2000-02-26  Tim Witham  <twitham@quiknet.com>
+
+	* gr_gtk.c:
+	Invented finditem to eliminate redundant menu string code and make it
+	possible to loop over sequences of menu items.  Used this to check
+	correct radio buttons and check buttons in memory and math menus.
+
+	* gr_gtk.c:
+	Put radio buttons and check boxes in the menus and wrote fix_widgets
+	to update them, like when the keyboard interface changes things.
+
+	* oscope.c: Fixed bug: stdout was getting closed accidentally.
+
+	* sc_linux.c: Don't try the ioctl's when using ESD!.
+
+	* sc_linux.c:
+	Enhanced ESD support to fall back to /dev/dsp if the esd connect fails.
+
+	* oscope.c:
+	Fixed warnings: suggest explicit braces to avoid ambiguous `else'
+
+	* Makefile, sc_linux.c:
+	Added compile-time option to support ESD instead of /dev/dsp.
+
+1999-09-01  Tim Witham  <twitham@quiknet.com>
+
+	* sc_sb.c, sc_linux.c, oscope.c:
+	Linux 2.2's sound driver apparently can't be reset multiple times.
+	So, to adjust the sound rate, we now close and reopen the device.
+	This does away with set_sound_card and reset_sound_card is enhanced to
+	do the close and open and reset all the settings.
+
+1999-08-28  Tim Witham  <twitham@quiknet.com>
+
+	* ser_unix.c:
+	Can now detect a WAITING! ProbeScope or one sending any acceptable
+	verions of the synchronization byte, from 0x7c to 0x7f.
+
+	* xy_gtk.c, gr_gtk.c:
+	Switched from 1.0 menu factory to 1.2 item factory.  Made the menus
+	tear-off-able.
+
+	* xy.c, com_gtk.c:
+	Changed from a timeout to idle function to maximize refresh rate while
+	interactive load changes.
+
+	* display.c:
+	Replaced data_good flag with smarter erase_data one.  This gets rid of
+	the bogus "blip" that it was seeing when changing sample rates.
+
+	* sc_linux.c:
+	Fixed 2 bugs: Changing the sample rate on the sound card wasn't
+	working.  Turns out it needs a reset after changing the rate, at least
+	on my 2.0.36 drivers.  Also, the delay position was not working on
+	falling edge trigger.
+
+1999-08-26  Tim Witham  <twitham@quiknet.com>
+
+	* ChangeLog: 1.5 released.
+
+	* oscope.lsm, README: For 1.5.
+
+	* proscope.dat, audio.dat, oscope.dat, com_gtk.h: New file.
+
+	* Makefile, oscope.1, config.h, TODO, TODO.old, file.c, display.h, oscope.h, ofreq.ini:
+	For 1.5.
+
+	* oscope.c:
+	Changed file load/save and external command calls to support UIs like
+	GTK+.  Moving signals off the screen now wraps them around to the
+	other side so you don't accidentally lose them.
+
+	* gr_gtk.c:
+	Moved SoundCard and ProbeScope switches into the Scope menu.
+
+	* display.c:
+	Fixed bug: SyncDisplay() call was being done out of order such that
+	Graticule In Front didn't work.  Corrected the order so it does.
+
+	* sc_linux.c:
+	Bruce Jerrick <bjerrick@easystreet.com> reported the DSP_RESET was
+	causing nearly a 4 second block on newer hardware and drivers.  Its
+	purpose was to flush excess samples to keep the display in real-time.
+	Upon looking at the sound driver source, I discovered a smarter way:
+	use DSP_GETISPACE to find out how many bytes are available.  Then read
+	and discard just the right amount of excess so we display the latest
+	snapshot of time.  This results in a much better screen refresh rate
+	and less sound recording overruns.  Excellent!  Thanks Bruce!
+
+1999-08-25  Tim Witham  <twitham@quiknet.com>
+
+	* display.c: Added frames per second refresh rate display.
+
+1999-08-24  Tim Witham  <twitham@quiknet.com>
+
+	* xy_sx.c, xy_gtk.c, com_gtk.c: New file.
+
+	* gr_gtk.c, xy.c:
+	Major rearranging so xy can be built under GTK+ or libsx.
+
+	* gr_com.c: New file.
+
+1999-08-23  Tim Witham  <twitham@quiknet.com>
+
+	* gr_gtk.c: Added man page in a window to the help menubar button.
+
+1999-08-21  Tim Witham  <twitham@quiknet.com>
+
+	* gr_gtk.c:
+	Commented out the libsx-like interface and moved everything into the
+	menubar.  This is because the buttons steal keyboard focus and I can't
+	figure out how to color code them to make them useful like in libsx.
+	The menubar-only interface looks cleaner too.
+
+1999-08-21  Tim Witham  <twitham@quiknet.com>
+
+	* gr_gtk.c:
+	Commented out the libsx-like interface and moved everything into the
+	menubar.  This is because the buttons steal keyboard focus and I can't
+	figure out how to color code them to make them useful like in libsx.
+	The menubar-only interface looks cleaner too.
+
+1999-08-20  Tim Witham  <twitham@quiknet.com>
+
+	* gr_gtk.c:
+	Added ExternCommand which replaces GetString as the new UI-independent
+	way to ask for and launch an external command.
+
+1999-08-19  Tim Witham  <twitham@quiknet.com>
+
+	* gr_gtk.c:
+	Moved file overwrite confirmation from file.c to here since it is UI
+	dependent.  This replaces GetYesNo which was used only for this.
+
+	* gr_gtk.c: Added LoadSaveFile.
+
+1998-09-23  Tim Witham  <twitham@quiknet.com>
+
+	* sc_sb.c, func.c, fft.c: Fixed sample rate.
+
+1998-08-22  Tim Witham  <twitham@quiknet.com>
+
+	* gr_gtk.c: Added button table to the right side of the screen.
+
+	* gr_gtk.c: Added button table at the bottom of the screen.
+
+	* gr_gtk.c: Added basic menubar.
+
+1998-08-21  Tim Witham  <twitham@quiknet.com>
+
+	* gr_gtk.c: New file.
+
+Fri Aug 29 04:57:48 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* oscope.c, file.c: Changed to more "standard" sound card sample rates.
+
+Wed Jun 11 02:46:05 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* ChangeLog: 1.4 released.
+
+	* oscope.lsm, oscope.1, README: For 1.4.
+
+	* gr_sx.c, display.c, oscope.c: Changed % key to ^, to be next to &.
+
+Tue Jun 10 04:14:47 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* TODO: Added #27, #28.
+
+	* TODO: Updated for 1.4.  Moved done TODOs to TODO.old.
+
+	* TODO.old: Initial revision
+
+	* config.h:
+	Changed default trigger to Auto which is a nicer startup mode for
+	unknown signals and is consistent with ProbeScope's power up.
+
+	* display.c:
+	ProbeScope and math on ProbeScope signals now show real V/div in place
+	of vertical scale.
+
+	* oscope.c:
+	Clear before entering the main loop.  To clean PS text for example.
+
+Sun Jun  8 07:28:53 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* README.f51, patch.f51:
+	Changes to support ProbeScope.  Allow up to 20MHz sample rate.  Scale
+	320 peak-to-peak (10 divisions) down to fit in an 8-bit byte.
+
+Sat Jun  7 21:41:23 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* oscope.c:
+	usage now takes an exit status.  The message is printed on stdout if
+	the exit status is zero, stderr otherwise.  Fixed sample rate changer
+	to work when the actual sample rate is different than that requested.
+
+	* file.c: Changed calls to usage to pass exit status.
+
+	* Makefile: Changes to support the new working DOS port.
+
+	* sb.h: Changed sb_set_sample_rate to return an int; the actual rate.
+
+	* sb.c:
+	Cut all playing stuff and tweaked recording stuff for my application.
+
+	* sc_sb.c: Finally works!  Mono only.  Thanks to code from sb02.zip.
+
+	* gr_grx.c: getch() blocks; call it only if kbhit().
+
+	* ser_dos.c: Initial revision
+
+	* display.c: Improved horizontal scale key labeling.
+
+Sat May 31 21:23:49 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* config.h, oscope.c, file.c:
+	Added -x and -z command line and file options for turning sound card
+	and ProbeScope devices off.
+
+	* gr_sx.c, display.c, oscope.c, sc_sb.c, sc_linux.c:
+	Sound card is now optional.  You may turn it on/off with & key.  Since
+	this feature needs to close and re-open the device, dynamic DMA
+	factor setting is also back, now it's on the * key.
+
+	* oscope.h:
+	Added snd file descripter and/or whether sound is running or not.
+
+	* operl:
+	Improved efficiency and performance by remembering only the signals
+	the users' function needs, if any.
+
+Fri May 30 04:44:18 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* proscope.c:
+	Fixed bug: in SINGLE shot mode, a 0x7f after the aquisition was
+	sometimes getting used as byte 1 (switch setting).  Oops.
+
+	* proscope.c:
+	If probescope() doesn't reach the end of the serial FIFO during the
+	reading, it now does a flush_serial() to get caught up.  This is to
+	prevent data corruption when the scope gets too slow, like when doing
+	external math commands.
+
+	* proscope.h, ser_unix.c:
+	Added flush_serial which discards all bytes from the serial FIFO
+	input.  This is used before detecting to get rid of outstanding bytes
+	that could mislead the detection.
+
+	* display.c: Fixed bug: the first sample wasn't being plotted.
+
+Wed May 28 05:55:52 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* display.c: Added text and rearranged to show ProbeScope status.
+
+	* proscope.h, proscope.c:
+	Added ps structure and all the code needed to transfer ProbeScope
+	status to display.c.  Fixed WAITING! code; it was causing the software
+	to hang.  The trick here was to suck all sync/waiting bytes in a new
+	loop with no sleep, to keep the serial queue cleared.
+
+	* gr_sx.c: Fixes for the new function indexing of func.h/func.c.
+	Added PS button for ProbeScope Toggle/Re-scan for device.
+
+	* oscope.c:
+	Fixed init_channels for the new function indexing of func.h/func.c.
+	Added % key to toggle ProbeScope On/Off (& do a re-scan of the ports).
+
+	* ser_unix.c:
+	init_serial can now be called multiple times, setting ps.sound
+	directly if a ProbeScope is found.  This enables re-scanning.
+
+Tue May 27 05:56:00 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* sc_sb.c, sc_linux.c:
+	Moved clip reset to display.c to support ProbeScope.
+
+	* file.c: Fixes for the new function indexing of func.h/func.c.
+
+	* func.h, func.c:
+	Added ProbeScope, swapped MEMORY and EXTERN order to simplify.
+
+Mon May 26 16:27:21 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* ser_unix.c: Initial revision
+
+Sat May 24 23:36:40 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* Makefile, config.h, display.c, oscope.c:
+	Initial changes to support ProbeScope input.
+
+	* proscope.h, proscope.c: Initial revision
+
+Sun May  4 21:34:37 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* ChangeLog: 1.3 released.
+
+	* sc_linux.c: Fixed bug that caused sound to fail to open.
+
+	* TODO, oscope.lsm, README, config.h, sc_sb.c: For 1.3.
+
+	* display.h: Exported the init_widgets function to oscope.c
+
+	* oscope.h: Exported some init functions for file.c.
+
+	* oscope.1, sc_linux.c, display.c, file.c:
+	Removed the ability to change DMA on the fly since it requires closing
+	and reopening the device; I want to open once and keep it open.
+
+	* gr_sx.c: Tossed loadfile and savefile; just hit_keys instead.
+
+	* func.c: Set signal colors to 0 on initialization.
+
+	* file.c:
+	Reinitialize everything before loading a file.  This is to clear all
+	memories and functions so they're not still around after the load.
+
+Sat May  3 16:15:57 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* func.h, func.c, oscope.h, oscope.c, file.c, gr_sx.c:
+	Moved command and pid into the channel structure.  Removed some unused
+	variables from header files.
+
+	* sc_sb.c: Updated for 1.3 again.
+
+	* oscope.1: Fixed -s docs.
+
+	* sc_linux.c, oscope.h:
+	Moved buffer and junk into sc_linux.c, the only place they're used.
+
+	* oscope.c, sc_linux.c:
+	Improved the way the sound card gets reset.  Eliminated the `actual'
+	global var; scope.rate now holds the actual sample rate correctly.
+
+	* file.c: Enhanced -s to allow fractional values, using new scope.div.
+
+	* display.c: Fixed bug in the bounds limit of the delay calculation.
+
+Fri May  2 06:01:11 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* gr_sx.c: Added an XY button to make xy easier to start.
+
+	* display.c:
+	Added a bogus math warning message when Channel 1 and 2 are at
+	different sample rates.
+
+	* oscope.h, display.c, oscope.c:
+	Added scope.div.  This allows skipping of samples to see more time.
+
+Thu May  1 04:49:25 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* sc_linux.c, oscope.1, func.h, oscope.h, gr_sx.c, func.c, display.c, file.c, oscope.c:
+	Major internal changes: Left and Right sound inputs are no longer
+	"hard-wired" to the 1st and 2nd displays.  This was implemented as
+	follows: The 8 displays were changed to new Channel stuctures.  There
+	are now 34 static Signal structures: 23 memories, left input, right
+	input, one reserved, and 8 functions.  One element of the Channel
+	structure points to the Signal structure being displayed by that
+	Channel.  Some appropriate display, control, and file I/O tweaks were
+	made to support all this.  Several former limitations are now lifted.
+
+	* Makefile: Added some DJGPP lines, renamed some files.
+
+Tue Apr 29 05:08:18 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* sc_sb.c:
+	Tossed commented junk.  Updated for 1.3.  Still doesn't work.
+
+Sat Apr 26 01:55:03 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* display.c:
+	Enhanced draw_data to work with arbitrary sample rates.  It does this
+	by determining which sample, if any, should be plotted at each time
+	position on the display.
+
+	* sc_sb.c: Initial revision
+
+Sun Feb 23 05:24:40 1997  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* gr_grx.c: Initial revision
+
+	* file.c:
+	Fixed b and v option initializations to use #defines from config.h
+
+Sun Nov 17 22:34:21 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* oscope.c:
+	Moved sound-card specifics to sc_linux.c to make porting easier.
+
+	* sc_linux.c: Initial revision
+
+Sat Oct 12 16:12:05 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* ChangeLog: 1.2 released.
+
+	* oscope.lsm, README, README.freq51, Makefile: For 1.2.
+
+	* display.c: Turned the Channel headers back on.
+
+Sun Oct  6 06:43:50 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* xy.c: Added quit button and plot mode menu.
+
+	* TODO, Makefile, oscope.1, config.h, oscope.h, x11.c, file.c, oscope.c, display.c:
+	Made the display less verbose by default.  All non-essential text is
+	suppressed.  Hitting '?' toggles the extra text on/off.  -v command
+	line / file option will make the display verbose at startup.
+
+	* oscope.h, oscope.c, x11.c:
+	Enhanced to support the new display-independent display.c.
+
+	* display.h, display.c:
+	Pulled VGA specific code out into new vga.c for easier maintenance.
+	Now this file is completely display independent, leaving it up to the
+	final link to provide all the display-specific functions.
+
+	* vga.c: Initial revision
+
+Sat Oct  5 21:12:45 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* file.c: Overwriting an existing file now requires confirmation.
+
+	* display.c: Added GetYesNo for svgalib.
+
+	* x11.c: Added Run, Wait, Stop buttons to support new single-shot mode.
+
+	* HARDWARE:
+	Added references to and descriptions of new buff2 and pcb files.
+
+	* oscope.1, oscope.c, display.c: Added wait (single-shot) mode.
+
+Fri Oct  4 05:14:02 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* xy.c: Initial revision
+
+	* display.c:
+	Optimized draw_data for at least 2x performance improvement.  The
+	problem was the color was being toggled for each sample in one
+	erase/plot loop.  Now we set color, erase all, set color, plot all.
+
+	* x11.c, func.c:
+	Fixed bug: cleanup could call free on a NULL pointer (seg fault).
+
+Fri Sep  6 03:53:59 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* pcb.ps, pcb.fig, buff2.ps, buff2.fig: Initial revision
+
+Tue Aug  6 04:56:42 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* func.c: Fixed a bug: average didn't work!
+
+Sat Aug  3 23:14:57 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* ChangeLog: 1.1 released.
+
+	* oscope.lsm: For 1.1.
+
+	* HARDWARE, TODO, README.freq51, freq51.patch, buff.ps, buff.fig:
+	Initial revision
+
+	* README: Updated for 1.1 release.
+
+	* Makefile:
+	Updates for the new external command path and other changes.
+
+	* oscope.1: Updated for 1.1 release.
+
+	* offt.c:
+	Renamed oscope.fft to offt for easier typing (comment change only).
+
+	* config.h: Renamed oscope.perl to operl for easier typing.
+
+	* oscope.c, func.h, func.c:
+	Added new invert functions and OSCOPEPATH for external commands.
+
+	* ofreq.ini: Initial revision
+
+	* operl:
+	Fixed bug in the delay example; it was being delayed by $x instead of $t.
+
+Tue Jul 30 05:42:58 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* display.c:
+	Fixed bug: in accumulate modes, the current set of data would be drawn
+	incorrectly just after a S/s change.  Optimized the draw_data loops.
+
+Sat Jul 27 05:43:18 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* fft.c: Synched with freq51.
+
+Fri Jul 12 03:02:27 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* oscope.c, display.c:
+	First sample is now the one just before trigger, second the one after.
+	We "connect" these samples with a straight line to more accurately
+	guess where the trigger really was.  All samples are then shifted
+	horizontally to position the trigger at time zero.  This greatly
+	improves the horizontal resolution of high frequency signals in either
+	of the accumulate modes.  This is best used by placing the trigger at
+	0 where the linear approximation is most correct.
+
+Sat Apr 27 17:47:21 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* ChangeLog: 1.0 released.
+
+	* ChangeLog: Initial revision
+
+Sun Apr 21 03:11:51 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* oscopefft.c: Fixed bug in the documentation.
+
+	* oscope.lsm: For 1.0.
+
+	* oscope.1: Fixed date.
+
+	* Makefile: Added external command examples, version bump to 1.0.
+
+	* config.h: Added COMMAND and FFTLEN.
+
+	* file.c: Rearranged to support new external math commands.
+
+	* x11.c: Rearranged, got widgets to disable themselves appropriately.
+
+	* func.h, func.c:
+	Moved FFT out to fft.c so it can also be used externally by
+	oscopefft.c.  Cleaned up.
+
+	* oscope.h, oscope.c:
+	Added new external math command interface ($ key).
+
+	* oscope.1:
+	Updated for 1.0, documenting new external command interface ($).
+
+	* fft.c:
+	Removed main() and tweaked so this one file can be used for both
+	internal (func.c) and external (oscopefft.c) FFT functions.
+
+	* README: For 1.0.
+
+	* display.c: Rearranged.  Fixed an off-by-one error in col().
+
+	* oscope.perl:
+	Error checking so it will exit when the pipe closes.  Better docs.
+
+	* oscopefft.c: Initial revision
+
+Tue Apr 16 04:16:51 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* func.c: Added external command pipe, optimized some others.
+
+	* fft.c: Initial revision
+
+Tue Apr  9 07:13:51 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* oscope.perl: Initial revision
+
+Sun Mar 10 03:22:07 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* file.c: Fixed bug in the trigger limiter.
+
+	* Makefile: Added new file.c, freq.c, dirlist.c for file load/save.
+
+	* oscope.1: Updated to document the new file load/save features.
+
+	* README: Updated credits.
+
+	* config.h: Added new config options for new file I/O features.
+
+	* x11.h, x11.c: Load and Save now call GetFile of freq.c.
+
+	* freq.c, dirlist.c:
+	Added some #includes to suppress compiler warnings.
+
+	* func.c:
+	Channels displaying a memory buffer are now automatically updated
+	(recalled) when a new save happens to that buffer.  This is less
+	confusing.  Also fixed some malloc problems.
+
+	* display.h, display.c:
+	Added GetFile, message, and file Load/Save key text.
+
+	* oscope.h, oscope.c:
+	Moved handle_opt to new file.c, added -a and file save/load keys.
+
+	* file.h, file.c: Initial revision
+
+Sat Mar  9 21:47:14 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* dirlist.c, freq.c: Initial revision
+
+Sat Mar  2 07:24:04 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* oscope.lsm: For 0.5.
+
+	* Makefile: Added x11.c
+
+	* xdisplay.c: Fixed comments.
+
+	* func.h, func.c:
+	Only do math on visible and selected channels for max speed.
+
+	* oscope.1: Massive changes to document all the new features.
+
+	* config.h: Added (default) to the comments for documentation.
+
+	* x11.h: Initial revision
+
+	* oscope.c, oscope.h:
+	Added memory controls and improved usage to match new features.
+
+	* display.c, display.h: Many X11 specifics moved to x11.c.
+
+	* x11.c: Added memory buttons, optimized many things.
+
+Fri Mar  1 04:27:08 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* x11.c: Turned math button into a menu with current function checked.
+
+Wed Feb 28 06:09:06 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* x11.c: Initial revision
+
+Sat Feb 24 04:30:11 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* func.h, func.c: Improved measurements.
+
+Thu Feb 22 06:25:53 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* display.h, display.c:
+	Added clip detection (flash graticule in color of clipped channel).
+
+	* oscope.h, oscope.c:
+	Removed -v, added -1 through -8, simplified triggering scaling code.
+
+	* config.h: Initial revision
+
+Sat Feb 17 21:24:02 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* fft.h, realfft.c: Initial revision
+
+	* Makefile, oscope.h, func.h, func.c, display.c, oscope.c:
+	Added Fast Fourier Transform.
+
+Sun Feb  4 22:11:19 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* COPYING: Initial revision
+
+	* oscope.lsm: For 0.3.
+
+	* Makefile: Added func.c, fixed some bugs.
+
+	* README: Added installation instructions, updated for 0.3.
+
+	* oscope.c: Improved signal scaling, more like real scope.
+
+	* display.c: Improved text positioning.
+
+	* oscope.c, display.c, oscope.h:
+	Improved triggering: channel 1 or 2, rising or falling.
+
+Sat Feb  3 21:37:31 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* oscope.lsm: Initial revision
+
+	* oscope.c, func.h, func.c, oscope.h, display.c:
+	Added 4 more channels to display on right side of graticule.
+
+	* func.h, func.c, oscope.h, display.c:
+	Memory indicators now have color of recorded signal.
+
+	* func.h, func.c, oscope.c, display.c:
+	Added 26 signal memory buffers, one for each letter of the alphabet!
+
+	* display.c, oscope.c, oscope.h:
+	Time scaling a STOP'd display is now only allowed at 44000 Hz sampling
+	since anything else would need a new acquire.
+
+	* oscope.h, oscope.c, display.c:
+	Fixed the vertical scaling bug, moved more globals in to Scope struct.
+
+Fri Feb  2 07:11:15 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* oscope.c, oscope.h, display.c:
+	Moved signal math to new func.c so it can be easily extended.
+
+	* func.h, func.c: Initial revision
+
+	* oscope.h, oscope.c, display.c:
+	Added way cool channel selector to greatly improve the interface.
+	Removed channels; sampling is now always in stereo mode for simplicity.
+
+	* oscope.c: Added auto-measurements.
+
+	* display.c: Added min/max, period/frequency readout.
+
+Wed Jan 31 07:55:06 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* Makefile: Added xoscope man page.
+
+	* xoscope.1: Initial revision
+
+	* Makefile, README, display.c, display.h, oscope.1, oscope.c, oscope.h, xdisplay.c:
+	changed filenames from scope to oscope
+
+	* README: Added enhancement blurbs.
+
+	* README: Initial revision
+
+	* display.c, scope.c, Makefile, scope.h: Code cleanup.
+
+	* scope.c:
+	Signals now scalable.  Keyboard control rearranged to support this.
+
+	* display.c:
+	Added much text to the display, including keyboard key descriptors.
+
+Tue Jan 30 06:45:42 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* scope.h, display.c, scope.c:
+	Moved some globals in to the scope structure.
+
+	* display.c: Graticule now resizes vertically.
+
+Mon Jan 29 04:38:17 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* scope.c, display.c:
+	Added text channel displays to right side of screen.
+
+Sun Jan 28 23:41:31 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* scope.h, display.c, scope.c:
+	Converted to signed data to simplify math and positioning.
+
+	* display.c, display.h:
+	Improved text positioning; X VGA_WRITE now honors alignments like vgalib.
+
+	* scope.h, display.c, display.h, scope.c:
+	Added display-independent color; X uses 16 colors similar to console.
+	640x480 is now minumum supported size.  X display is resizable.
+
+	* scope.c, display.c:
+	Channels are now defined in a structure so we can easily extend.
+
+Fri Jan 26 07:52:45 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* display.c, scope.c:
+	Converted to more realistic 1/2/5 scaling with fixed graticule.
+
+Thu Jan 25 05:28:56 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* scope.c: Ignore unknown keypresses.
+
+	* display.c: Rearranged to eliminate forward reference.
+
+Tue Jan 23 08:00:10 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* Makefile: Major changes to support new multi-file source.
+
+	* display.h: Initial revision
+
+	* scope.h: Moved all display-specific code to new "display.h" file.
+
+	* scope.c:
+	Moved all display-specific code to new "display.c" file.  This greatly
+	modularizes the program for easier simultaneous console / X11 support.
+
+	* display.c, xdisplay.c: Initial revision
+
+	* Makefile: Added rules to make new xscope X client.
+
+Mon Jan 22 07:00:19 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* scope.c:
+	Now available as an X client via libsx!  Just #define XSCOPE.
+
+Sat Jan 20 08:31:03 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* scope.h: Added many #defines.
+
+	* scope.c:
+	Added optional (#define in scope.h) screen text via libvgamisc from g3fax.
+
+	* scope.c: Tiny tweaks for more stable display around keypresses.
+
+Fri Jan 19 07:12:34 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* scope.c:
+	Reset the sound card after each read.  This greatly improves response
+	time since only the first "screenful" of the FIFO is read.  The rest
+	is discarded and we start over from zero for the next screen.  This
+	prevents the samples from getting backed up and overflowing the FIFO.
+
+Wed Jan  3 06:18:57 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* Makefile: Added PREFIX (for install) and VER (for dist) variables.
+
+	* scope.1: Grammatical tweaks.
+
+	* scope.c: Minor tweaks to improve readibility.
+
+	* scope.1: Updated to reflect my changes (I hope).
+
+	* scope.1: Initial revision
+
+Tue Jan  2 07:25:28 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* scope.c: Converted R/r to use integer math like everything else.
+
+	* scope.h:
+	Changed default scale to 4, the middle of the 5 possible values.
+
+	* scope.c: Fixed some off-by-one errors in dual channel mode.
+	Tweaked graph_data loop for efficiency (added k).
+	Cleaned up usage.
+
+	* scope.h: Added DEF_12 for new dual channel mode.
+
+	* scope.c:
+	First working stereo (dual channel) mode!  Added -1/-2 options, 1/2 keys.
+
+	* Makefile: Bumped dist version from 0.1 to 1.0.
+
+	* Makefile: Added new scope.h dependency.
+
+	* Makefile, scope.h: Initial revision
+
+	* scope.c:
+	Added M/m and D/d for completeness, moved defaults to new scope.h.
+
+Mon Jan  1 20:45:12 1996  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* scope.c:
+	Improved triggering by forcing it to be at the trigger point.
+	Converted several keys to toggles, added V/v verbose toggle.
+	Rearranged usage to display interactive runtime keys.
+
+Sat Dec 30 10:30:39 1995  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* scope.c:
+	Added -b and B/b keys to swap the signal and graticle front/back.
+
+	* scope.c:
+	Keys are now handled during trigger wait.  The key forces a trigger.
+	Also added a horizontal time scale to the center of the graticule.
+
+	* scope.c: T and t keys now turn disabled trigger on at 128.
+	Using the keys to push trigger off scale disables it again.
+	Changed functions in the loop to static inline.
+	Added range forcing to -s since 0 was a fatal error.
+
+Fri Dec 29 08:42:14 1995  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* scope.c:
+	Enhanced -v to show each keypress; rearranged for readibility.
+
+	* scope.c:
+	Added new check_status function to eliminate some redundant code.
+
+	* scope.c:
+	Rearranged initialization so graticule is correct on startup.
+
+Thu Dec 28 06:50:33 1995  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* scope.c:
+	Keys are now handled while waiting on trigger.  Most won't have much
+	effect until trigger is actually detected, but at least you can hit
+	t/T to get the trigger back into range instead of locking up!
+
+Wed Dec 27 08:52:01 1995  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* scope.c:
+	Switched time scale to 5msec major divisions, added 0.5msec mini-ticks.
+
+	* scope.c: Simplified verbose output to fit all parameters on one line.
+
+	* scope.c:
+	Improved triggering to see only the rising or the falling edge, not both.
+
+	* scope.c:
+	Added -s time axis Scaling (1,2,4,8,16,32) so you can zoom in/out.
+	'S' key doubles it (zoom in) while the 's' key halves it (zoom out).
+
+Tue Dec 26 13:59:25 1995  Tim Witham  <twitham@pcocd2.intel.com>
+
+	* scope.c:
+	Converted time scale to use integer math instead of floating point.
+
+	* scope.c:
+	Added time scale: 1 msec tick marks and 10 msec vertical lines.
+
+	* scope.c: Initial revision
+

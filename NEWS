@@ -1,0 +1,176 @@
+	NEW for 2.0	Released June 2009
+	===========	==================
+
+* Completely X Windows / GTK 2.0 based
+
+* Ability to scroll a signal too wide to fit on the screen
+
+
+	NEW for 1.10	Released June 2003
+	============	==================
+
+* COMEDI support - http://www.comedi.org/
+
+* Ability to use parallel port for digital data collection
+
+* Improved performance under X Windows
+
+* More modular data source interface
+
+	NEW for 1.8	Released May 2001
+	===========	=================
+
+* Standard GNU-style `./configure ; make' automated build process.
+
+* Samples are now collected in parallel to display refresh for audio
+  and bitscope devices.
+
+* This has enabled much longer sweep times: up to 2 sec/division!
+
+* Memory buffers increased to 256K to support such slow sweeps.
+  Memories now store time zero to current display point and file
+  length is as long as longest memory.
+
+* New step display mode, hit the ! key.
+
+* Under GTK, mouse cursors are now draggable while left button
+  decreases and middle button increases the variable pointed to.
+  Right menu still pops up the context-sensitive menu.
+
+* Basic limited bitscope data capture at a fixed sample rate.  If a
+  BitScope is identified, it is used exclusively, turning off sound
+  and ProbeScope input devices.  It connects BitScope Channel A, B and
+  LA to X, Y and Z respectively.
+
+
+	NEW for 1.7	Released June 2000
+	===========	==================
+
+* Logic Analyzer display mode.  Instead of drawing one analog line,
+  multiple digital bit lines are drawn.  Hit ` or ~ to decrease or
+  increase the number of bits shown.
+
+* Manually-positioned measurement cursors.  Hit ' to turn them on, "
+  to reset them, and Ctrl-d/f/e/r to move them.  Under GTK+, left
+  click positions one cursor and middle click sets the other.  Right
+  click always brings up the context-sensitive menu.
+
+
+	NEW for 1.6	Released March 2000
+	===========	===================
+
+* EsounD (Enlightened Sound Daemon) support.  Esd is common with Gnome
+  and allows xoscope to share a sound device with other programs or
+  across a network.  So xoscope can now see your MP3s playing on xmms!
+
+* GTK+ 1.2 or better is now required to build the xoscope X11 client:
+
+  + Oft-used menus can be "torn-off" and kept available.
+
+  + Context-sensitive pop-up menus for selecting channel, scale,
+    position, memory store and recall, plot mode, trigger, etc.
+
+
+	NEW for 1.5	Released August 1999
+	===========	====================
+
+* GTK+ support for building the xoscope X11 client
+
+	+ This release supports 1.0 now but future versions will
+	  require 1.2 or higher.  You can ignore the menu_factory
+	  warning if you build with 1.2+.  This warning will go away
+	  in 1.6 and is why GTK+ 1.2 will then be required.
+
+	+ keyboard interface works as in all other interfaces
+
+	+ nearly everything is also available from the menubar
+
+	+ double buffered display (no loss if you cover it up)
+
+	+ xoscope will build with GTK+ (default) *or* libsx, see Makefile
+
+* Bug Fixes / Enhancements
+
+	+ sound card sample rates fixed (i.e. 44100, not 44000).
+
+	+ smarter more correct sound card buffer flushing and syncing
+
+	+ this results in a faster refresh rate in real-time
+
+	+ new frame per second display shows actual refresh rate
+
+* New example data files to load or look at
+
+	+ audio.dat: good for watching stereo audio
+
+	+ proscope.dat: good for using ProbeScope/osziFOX
+
+	+ oscope.dat: default settings, good for resetting
+
+
+	NEW for 1.4	Released June 1997
+	===========	==================
+
+* Supports Radio Shack's ProbeScope as an input device!
+
+	+ auto-detected, see ENVIRONMENT in the man page.
+
+	+ increased time scale: 1us/div - 20ms/div
+
+	+ real V/div vertical scale labels.
+
+	+ displays all ProbeScope status and DVM value
+
+* DOS port finally works
+
+	+ All ProbeScope support works on DOS.
+
+	- mono sound support only so X = Y; no Left and Right.
+
+	- external math commands don't work since DOS doesn't fork
+
+
+	NEW for 1.3	Released May 1997
+	===========	=================
+
+* sample rate can be changed independent of horizontal scale.
+
+* signals of any sample rate can now be stored and recalled.
+
+* you can zoom out further to see more time (skip samples).
+
+* math functions can now operate on memory buffers.
+
+* display and controls rearranged slightly; a button for xy.
+
+* the code is more modular for easier porting, see TODO #24.
+
+* unfinished DOS (DJGPP/GRX) port is included, see TODO #24.
+
+
+	NEW for 1.2	Released October 1996
+	===========	=====================
+
+* !!! At least 2X faster (inefficient display loop fixed) !!!
+
+* average math function fixed; it didn't work in 1.2.
+
+* single shot mode; show the first set of samples after trigger.
+
+* xy external command for xoscope; show xy in another window.
+
+* cleaner easier to read display; hit ? to toggle the help screen.
+
+* buff2.*, pcb.*; exact layout of the circuit described in HARDWARE.
+
+
+	NEW for 1.1	Released August 1996
+	===========	====================
+
+See ChangeLog
+
+
+	NEW for 1.0	Released April 1996
+	===========	===================
+
+See ChangeLog

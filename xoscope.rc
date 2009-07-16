@@ -1,0 +1,63 @@
+#style "violet_help_label" { fg[NORMAL] = "Violet" fg[INSENSITIVE] = "Black" fg[PRELIGHT] = "Black" fg[ACTIVE] = "Black" fg[SELECTED] = "Black" bg[NORMAL] = "Violet" bg[INSENSITIVE] = "Black" bg[PRELIGHT] = "Black" bg[ACTIVE] = "Black" bg[SELECTED] = "Black" text[NORMAL] = "Violet" text[INSENSITIVE] = "Black" text[PRELIGHT] = "Black" text[ACTIVE] = "Black" text[SELECTED] = "Black" base[NORMAL] = "Violet" base[INSENSITIVE] = "Black" base[PRELIGHT] = "Black" base[ACTIVE] = "Black" base[SELECTED] = "Black" }
+
+style "black_bg" { bg[NORMAL] = "Black" }
+style "red_bg" { bg[NORMAL] = "Red"}
+
+style "label_font" { font_name = "Helvetica 16" }
+
+style "white" { fg[NORMAL] = "White" }
+style "green" { fg[NORMAL] = "Green" }
+style "cyan" { fg[NORMAL] = "Cyan" }
+style "yellow" { fg[NORMAL] = "Yellow" }
+style "orange" { fg[NORMAL] = "Orange" }
+style "violet" { fg[NORMAL] = "Violet" }
+style "blue" { fg[NORMAL] = "Blue" }
+style "red" { fg[NORMAL] = "Red" }
+
+style "red_scrollbar" { fg[NORMAL] = "White" fg[PRELIGHT] = "White" fg[ACTIVE] = "White" bg[NORMAL] = "#a00000" bg[PRELIGHT] = "Red" bg[ACTIVE] = "#600000" }
+
+widget "main_window" style "black_bg"
+widget "main_window.*.databox" style "black_bg"
+widget "main_window.*.databox_frame" style "red_bg"
+widget "main_window.*.databox_hscrollbar" style "red_scrollbar"
+
+# This has the effect of not only setting color and font for labels
+# not specified below, but also of setting font for all the labels
+# because the fonts aren't specified below
+
+#widget "main_window.*_label" style "label_font"
+widget "main_window.*_label" style "white"
+
+widget "*.sample_rate_label" style "green"
+widget "*.samples_per_frame_label" style "green"
+widget "*.period_label" style "green"
+widget "*.min_max_label" style "green"
+
+widget "*.Ch1*" style "green"
+widget "*.Ch2*" style "cyan"
+widget "*.Ch3*" style "yellow"
+widget "*.Ch4*" style "orange"
+widget "*.Ch5*" style "violet"
+widget "*.Ch6*" style "blue"
+widget "*.Ch7*" style "red"
+widget "*.Ch8*" style "white"
+
+widget "*.*_key_label" style "violet"
+widget "*.*_help_label" style "green"
+
+widget "*.quit_help_label" style "white"
+widget "*.load_help_label" style "white"
+widget "*.load_help_label" style "white"
+widget "*.save_help_label" style "white"
+widget "*.xoscope_help_label" style "white"
+widget "*.version_help_label" style "white"
+widget "*.help_label" style "white"
+widget "*.refresh_help_label" style "white"
+widget "*.graticule_help_label" style "white"
+widget "*.graticule_position_help_label" style "white"
+widget "*.color_help_label" style "white"
+
+# This one's a bit special - it's a key label, but not a "*_key_label"
+# so it doesn't appear and disappear and therefore has to be set explicitly
+
+widget "*.question_mark_label" style "violet"

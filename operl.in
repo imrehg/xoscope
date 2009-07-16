@@ -1,0 +1,124 @@
+#!@PERL@
+
+# @(#)$Id: operl.in,v 2.0 2008/12/17 17:35:46 baccala Exp $
+
+# Copyright (C) 1996 - 2001 Tim Witham <twitham@pcocd2.intel.com>
+
+# (see the files README and COPYING for more details)
+
+# x*oscope external math filter command example in perl
+
+# !!! Please see bottom of this file for instructions and examples !!!
+
+$| = 1;				# unbuffer stdout
+$0 =~ s!.*/!!;			# reduce to program basename
+$func = $ARGV[0];		# get function to run from command line
+$samples = $ARGV[1] || 640;	# assume 640 total samples per screen
+$func =~ s/\#.*$//;		# toss comments
+$func =~ s/^\s*(\$z\s*=)?\s*//;	# and assumed leading/trailing stuff, if any
+$func =~ s/\s*;*\s*$//;
+die "usage: $0 'perl math function of \$t, \$x and \$y' [sample length]\n"
+    unless $func;		# oops
+$func = "\$z = $func;";		# '$z=' and ';' are implied around function
+
+open(IN, '-')			# open stdin for reading
+    || die "$0: Can't read stdin: $!\n";
+open(OUT, '>-')			# and stdout for writing
+    || die "$0: Can't write stdout: $!\n";
+
+$pi = 3.14159265359;		# define pi for user's convenience
+$t = 0;				# sample position number (time)
+for (1..$samples) {		# initialize sample memory "shift registers"
+    push(@x, 0);		# channel 1 (left)
+    push(@y, 0);		# channel 2 (right)
+    push(@z, 0);		# output back to software channel
+}
+
+# For efficiency, we now dynamically build a while loop around the
+# user's function then evaluate (compile and run) it once.
+
+# begin of loop: how to read the samples (two shorts) from stdin:
+$begin = '
+while(1) {
+    sysread(IN, $buff, 2) || exit;
+    $x = unpack(\'s\', $buff);
+    sysread(IN, $buff, 2) || exit;
+    $y = unpack(\'s\', $buff);
+
+';
+
+# end: how to increment time, remember the samples, and write result to stdout:
+$end = '
+
+    $t = 0 if ++$t >= $samples;';
+
+# sample history is expensive, so we only remember those the function needs:
+$end .= '
+    pop(@x); unshift(@x, $x);' if $func =~ /\$x\[/;
+$end .= '
+    pop(@y); unshift(@y, $y);' if $func =~ /\$y\[/;
+$end .= '
+    pop(@z); unshift(@z, $z);' if $func =~ /\$z\[/;
+
+$end .= '
+    syswrite(OUT, pack(\'s\', $z), 2) || exit;
+}
+';
+
+# now put the loop around the user's function
+eval $begin.$func.$end;		# and finally run the loop forever
+warn "$@\n" if $@;		# show any user syntax errors on stderr
+
+__END__
+{}
+# !!!!!!!!!!		INSTRUCTIONS and EXAMPLES		!!!!!!!!!!
+
+# This is an example x*oscope external math filter command in perl
+
+# usage: operl 'math' [samples]
+
+# First argument is arbitrary signal math to do!  Be sure to quote the
+# math function from the shell, single-quotes are best.  Variables
+# available for your function:
+
+# $x	channel 1 (left)  input
+# $y	channel 2 (right) input
+# $z	output: '$z = ' is assumed before your function; don't use $z
+# @x	channel 1 "memory", $x[0] = previous sample, $x[1] = one before that...
+# @y	channel 2 "memory",         ... all the way to sample length or $x[639]
+# @z	output "memory", $z[0] = previous function output calculation, ...
+# $t	sample number, or "time", 0=left edge or trigger point
+# $pi	a constant: 3.14159265359, for your trigonometric convenience
+
+# Second command-line argument is the number of samples per screenful.
+# You may need to use this if you resize the window.  (default = 640)
+
+# example command-line argument functions, the ';' is optional:
+
+# functions of one of the input channels (would also work for $y):
+abs($x);			# rectify (absolute value)
+~$x;				# negate (invert)
+$x - $x[0];			# integral or rate of change since last sample
+$x - $x[2];			# same but over more time (3 sample periods)
+$x + 32;			# add a "DC offset" of 32 sample units
+$t > 43 ? $x[43] : 0;		# delay by 1 msec @ 44000 S/s = 44th sample
+
+# functions of both channel 1 and channel 2:
+$x * $y;			# multiply 1 * 2
+$x / ($y || 1);			# divide 1 / 2, avoiding divide by 0 error
+$y / ($x || 1);			# divide 2 / 1
+$x > $y ? $x : $y;		# max(1, 2)
+$x < $y ? $x : $y;		# min(1, 2)
+$x + $y;			# sum, like the oscope builtin
+$x - $y;			# diff, like the oscope builtin
+($x + $y) / 2;			# average, like the oscope builtin
+
+# time position ($t) functions, independent of $x and $y inputs:
+$t / 88 % 2 ? 64 : -64;		#  250 Hz square wave (88 = 44000 / 2 /  250)
+sin($t * $pi / 44) * 64;	#  500 Hz    sin wave (44 = 44000 / 2 /  500)
+cos($t * $pi / 22) * 64;	# 1000 Hz cosine wave (22 = 44000 / 2 / 1000)
+
+# low-pass filter: a difference equation of previous input and output:
+1.899105 * $z[0] - .901531 * $z[1] + .001213 * ($x + $x[1] + 2 * $x[0]);
+
+# operl ends here.

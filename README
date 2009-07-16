@@ -1,0 +1,141 @@
+
+oscope - Digital Oscilloscope via Sound Card/ProbeScope/osziFOX/bitscope
+
+Copyright (C) 1996 - 2002 Tim Witham <twitham@quiknet.com>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+	(see the file COPYING for more details)
+
+Latest official version and more is available at:
+
+		http://xoscope.sourceforge.net/
+
+
+	SUMMARY:
+
+x*oscope is a digital oscilloscope that uses a sound card (via
+/dev/dsp or EsounD) and/or Radio Shack ProbeScope (Cat. No. 220-0310)
+a.k.a osziFOX as the signal input.  Either or both devices may be used
+simultaneously.  You may find the manual for Radio Shack's ProbeScope
+device at: http://support.tandy.com/support_meters/33352.htm
+
+This device is also known as osziFOX and you may be able to get more
+information on and pictures of it at: http://www.wtt-germany.com/
+
+Bitscope support is currently under development and is included here
+only on an as-is basis.  Basic data capture may work at a fixed rate.
+Advanced features such as control and subsampling are not yet
+included.  For the latest bitscope development code, please check it
+out from CVS on sourceforge.  Bitscope is: http://www.bitscope.com
+
+
+	NEWS
+
+Has moved to the NEWS file, complete with version history!
+
+
+	INSTALLATION:
+
+* ./configure
+
+* make
+
+* make install
+
+
+	WHAT YOU NEED:
+
+LINUX:
+
+A modern Linux distribution should be able to build xoscope from
+source as shown above.  If not, all things mentioned here can be found
+by a search on http://www.freshmeat.net.
+
+* You will need an audio mixer program to select input source and
+  levels.  Examples are "gmix", "xfmix", "xmix", and "aumix".
+
+* You will need "GTK+" to build the X client (highly recommended).
+
+* OR (outdated) you can use "libsx" to build an X client if you don't
+  have GTK+.  Last tried with version 2.03.
+
+* You will need "libvga" from the "svgalib" package to build the
+  SVGA console version.  You may already have this in /usr/lib.
+
+* You will need "libvgamisc" from the "g3vga" kit to get text on the
+  console version (recommended if you use the console version).  You
+  only need to make misc/libvgamisc.a then move it to somewhere like
+  /usr/local/lib or /usr/lib.
+
+If you have X11 and would like to do simultaneous Spectrum Analysis,
+see the file README.f51 for extra optional instructions.  WARNING: I
+haven't tried this lately.
+
+DOS:
+
+I never use DOS, so I can't really support it.  But it worked in
+version 1.4 and should still work in theory.  Please see Makefile.dos
+for more information.
+
+
+	USAGE:
+
+Please see the man page for instructions on how to use x*oscope.  Also
+use the option `-h' to show command-line options, and the `?' key to
+show the key help.  If you're interested in doing advanced signal math
+at run-time, see the operl and offt.c external math command examples.
+
+
+	PLATFORMS:
+
+LINUX:
+
+/dev/dsp supported sound card or EsounD & ProbeScope/osziFOX optional
+
+x*oscope was developed specifically for Linux on:
+
+ - Linux kernel 1.2.10	and later on:	2.2.16
+ - gcc 2.6.3				gcc 2.96
+ - svgalib 1.2.9			1.4.2
+ - libsx 1.1				GTK+ 1.2.8
+ - SoundBlaster 16
+ - ATI Win Turbo 2MB VRAM
+ - 32MB RAM				96MB RAM
+ - 100 MHz Intel Pentium(R) Processor	Celeron 300A
+
+x*oscope can be ported to other platforms by simply writing display
+(gr_*.c) sound card (sc_*.c) and serial port (ser_*.c) connections.
+
+
+	EXTRA:
+
+If you like to build things, check out the HARDWARE file.
+
+
+	CREDITS:
+
+Have moved to the AUTHORS file.
+
+
+	DISCLAIMER:
+
+This was written by me on my own time and equipment.  My employer has
+absolutely nothing to do with it.  See also the file COPYING.
+
+Please send any comments, bug reports or suggestions to me:
+
+-- 
+Tim Witham <twitham@quiknet.com> a.k.a. <twitham@pcocd2.intel.com>
