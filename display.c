@@ -35,7 +35,6 @@ extern GtkWidget *databox;
 #define DEBUG 0
 
 int     triggered = 0;          /* whether we've triggered or not */
-void    *font;
 int     math_warning = 0;       /* TRUE if math has a problem */
 
 struct signal_stats stats;
