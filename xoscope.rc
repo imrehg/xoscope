@@ -6,7 +6,7 @@ style "red_bg" { bg[NORMAL] = "Red"}
 style "label_font" { font_name = "Helvetica 16" }
 
 style "white" { fg[NORMAL] = "White" }
-style "green" { fg[NORMAL] = "Green" }
+style "green" { fg[NORMAL] = "Light Green" }
 style "cyan" { fg[NORMAL] = "Cyan" }
 style "yellow" { fg[NORMAL] = "Yellow" }
 style "orange" { fg[NORMAL] = "Orange" }
@@ -18,7 +18,7 @@ style "red_scrollbar" { fg[NORMAL] = "White" fg[PRELIGHT] = "White" fg[ACTIVE] =
 
 widget "main_window" style "black_bg"
 widget "main_window.*.databox" style "black_bg"
-widget "main_window.*.databox_frame" style "red_bg"
+widget "main_window.*.databox_aspectframe" style "red_bg"
 widget "main_window.*.databox_hscrollbar" style "red_scrollbar"
 
 # This has the effect of not only setting color and font for labels
@@ -28,12 +28,15 @@ widget "main_window.*.databox_hscrollbar" style "red_scrollbar"
 #widget "main_window.*_label" style "label_font"
 widget "main_window.*_label" style "white"
 
+widget "*.data_source_label" style "white"
+widget "*.fps_label" style "white"
 widget "*.sample_rate_label" style "green"
 widget "*.samples_per_frame_label" style "green"
 widget "*.period_label" style "green"
 widget "*.min_max_label" style "green"
 
 widget "*.Ch1*" style "green"
+#widget "*.Ch1*" style "red_bg"
 widget "*.Ch2*" style "cyan"
 widget "*.Ch3*" style "yellow"
 widget "*.Ch4*" style "orange"
@@ -61,3 +64,4 @@ widget "*.color_help_label" style "white"
 # so it doesn't appear and disappear and therefore has to be set explicitly
 
 widget "*.question_mark_label" style "violet"
+#widget "*.left_paren_key_label" style "red"

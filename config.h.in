@@ -1,29 +1,58 @@
-/* config.h.in.  Generated from configure.in by autoheader.  */
-/*
- * @(#)$Id: acconfig.h,v 2.3 2009/01/14 18:21:06 baccala Exp $
- *
- * Copyright (C) 1996 - 2001 Tim Witham <twitham@quiknet.com>
- *
- * (see the files README and COPYING for more details)
- *
- * This file simply sets the program's compile-time options.
- * Original shipped values are in (parentheses).
- *
- */
+/* config.h.in.  Generated from configure.ac by autoheader.  */
 
-/* I think these came from glade, not used much yet */
-#undef ENABLE_NLS
-#undef HAVE_CATGETS
-#undef HAVE_GETTEXT
-#undef HAVE_LC_MESSAGES
-#undef HAVE_STPCPY
-#undef HAVE_LIBSM
-#undef PACKAGE_LOCALE_DIR
-/* for glade pixmaps, if any */
-#undef PACKAGE_DATA_DIR
-#undef PACKAGE_SOURCE_DIR
-/* for xoscope external math commands */
-#undef PACKAGE_LIBEXEC_DIR
+/* calculate RMS of captured signal */
+#undef CALC_RMS
+
+/* max number of channels */
+#undef CHANNELS
+
+/* Descr */
+#undef COMEDI_GET_CMD_GENERIC_TIMED_TAKES_5_ARGS
+
+/* default external command pipe */
+#undef COMMAND
+
+/* default ALSA soundcard device */
+#undef DEFAULT_ALSADEVICE
+
+/* active channel */
+#undef DEF_A
+
+/* graticle in front of data */
+#undef DEF_B
+
+/* X11 font */
+#undef DEF_FX
+
+/* full graticle display */
+#undef DEF_G
+
+/* cursor lines */
+#undef DEF_L
+
+/* plot mode 2 (lines, sweep) */
+#undef DEF_P
+
+/* sample rate in Hz */
+#undef DEF_R
+
+/* time scale in ms/div */
+#undef DEF_S
+
+/* trigger level */
+#undef DEF_T
+
+/* verbose display off */
+#undef DEF_V
+
+/* maximum samples to discard at each pass if we have too many */
+#undef DISCARDBUF
+
+/* output from fft is compressed (or streched) to that number of bands */
+#undef FFT_DSP_LEN
+
+/* default file name */
+#undef FILENAME
 
 /* Define to 1 if you have the <dirent.h> header file, and it defines `DIR'.
    */
@@ -35,14 +64,23 @@
 /* Define to 1 if you have the `getcwd' function. */
 #undef HAVE_GETCWD
 
+/* Define if gtkdatabox supports setting grid line styles. */
+#undef HAVE_GRID_LINESTYLE
+
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `asound' library (-lasound). */
+#undef HAVE_LIBASOUND
 
 /* Define to 1 if you have the `comedi' library (-lcomedi). */
 #undef HAVE_LIBCOMEDI
 
 /* Define to 1 if you have the `esd' library (-lesd). */
 #undef HAVE_LIBESD
+
+/* Define to 1 if you have the `fftw3' library (-lfftw3). */
+#undef HAVE_LIBFFTW3
 
 /* Define to 1 if you have the `m' library (-lm). */
 #undef HAVE_LIBM
@@ -112,6 +150,9 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
+/* shell command for X11 help */
+#undef HELPCOMMAND
+
 /* Define to 1 if `major', `minor', and `makedev' are declared in <mkdev.h>.
    */
 #undef MAJOR_IN_MKDEV
@@ -119,6 +160,12 @@
 /* Define to 1 if `major', `minor', and `makedev' are declared in
    <sysmacros.h>. */
 #undef MAJOR_IN_SYSMACROS
+
+/* maximum number of samples stored in memories */
+#undef MAXWID
+
+/* minimum number of milliseconds between refresh on libsx version */
+#undef MSECREFRESH
 
 /* Name of package */
 #undef PACKAGE
@@ -135,11 +182,23 @@
 /* Define to the one symbol short name of this package. */
 #undef PACKAGE_TARNAME
 
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
+
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
+/* Path to Perl executable */
+#undef PERL
+
 /* Define as the return type of signal handlers (`int' or `void'). */
 #undef RETSIGTYPE
+
+/* samples to discard after a reset */
+#undef SAMPLESKIP
+
+/* use 16 bit format for sound card */
+#undef SC_16BIT
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
@@ -161,55 +220,3 @@
 
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 #undef size_t
-
-/* program defaults for the command-line options (original values) */
-#define DEF_A	1		/* 1-8 (1) */
-#define DEF_R	44100		/* 8000,11025,22050,44100 (44100) */
-#define DEF_S	10		/* 1,2,5,10,20,50,100,200,500,1000 (10) */
-#define DEF_T	"0:0:x"		/* -128-127:0,1,2:x,y ("0:0:x") */
-#define DEF_L	"1:1:0"		/* 1-MAXWID:1-MAXWID:0,1 ("1:1:0") */
-#define DEF_D	4		/* 1,2,4 (4) */
-#define DEF_F	""		/* console font, "" = default ("") */
-#define DEF_FX	"8x16"		/* X11 font ("8x16") */
-#define DEF_P	2		/* 0,1,2 (2) */
-#define DEF_G	2		/* 0,1,2 (2) */
-#define DEF_B	0		/* 0,1 (0) */
-#define DEF_V	0		/* 0,1 (0) */
-#define DEF_X	0		/* 0,1 (0) don't use sound card? */
-#define DEF_Z	0		/* 0,1 (0) don't search for Serial Scope? */
-
-/* maximum number of samples stored in memories (1024 * 256) */
-#define MAXWID		1024 * 256
-
-/* The first few samples after a reset seem invalid.  If you see
-   strange "glitches" at the left edge of the screen, increase this (32) */
-#define SAMPLESKIP	32
-
-/* maximum samples to discard at each pass if we have too many (16384) */
-#define DISCARDBUF 16384
-
-/* max number of channels, up to 8 (8) */
-#define CHANNELS	8
-
-/* minimum number of milliseconds between refresh on libsx version (30) */
-#define MSECREFRESH	30
-/* a lower number here can increase refresh rate but at the expense of
-   interactive response time as the X server becomes too busy */
-
-/* bourne shell command for X11 Help ("man -Tutf8 xoscope 2>&1") */
-#define HELPCOMMAND	"man -Tutf8 xoscope 2>&1"
-
-/* default file name ("oscope.dat") */
-#define FILENAME	"oscope.dat"
-
-/* default external command pipe to run ("operl '$x + $y'") */
-#define COMMAND		"operl '$x + $y'"
-
-/* FFT length, shorter than minimum screen width and multiple of 2 (512) */
-#define FFTLEN	512
-
-/* preferred path to probescope serial device ("/dev/probescope") */
-#define PROBESCOPE "/dev/probescope"
-
-/* preferred path to bitscope serial device ("/dev/bitscope") */
-#define BITSCOPE "/dev/bitscope"

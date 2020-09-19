@@ -1,4 +1,4 @@
-.\" @(#)$Id: xoscope.1,v 2.4 2009/06/26 19:15:38 baccala Exp $
+.\" @(#)$Id: xoscope.1,v 2.5 2009/08/14 03:15:06 baccala Exp $
 .\"
 .\" Copyright (C) 1996 - 2000 Tim Witham <twitham@quiknet.com>
 .\"
@@ -20,11 +20,12 @@ input devices currently include:
 .P
 
 .TP 0.5i
-.B /dev/dsp
-Audio sound recording via /dev/dsp.  Two 8-bit analog channels at 8000
-S/s to 44100 S/s.  Left and right audio is connected to A and B inputs
-respectively.  Use an external mixer program to select which sound
-inputs to record.  AC coupled, voltages unknown, 256K sample memory.
+.B Soundcard
+Audio sound recording via Advanced Linux Sound Architecture (ALSA).
+Two 8-bit analog channels at 8000 S/s to 44100 S/s.  Left and right
+audio is connected to A and B inputs respectively.  Use an external
+mixer program to select which sound inputs to record.  AC coupled,
+voltages unknown, 256K sample memory.
 
 .TP 0.5i
 .B EsounD
@@ -33,48 +34,12 @@ for watching music but support for it is an option at compile-time.
 EsounD is auto-detected and preferred over /dev/dsp.
 
 .TP 0.5i
-.B ProbeScope / OsziFOX
-Radio Shack ProbeScope, Cat. No. 22-310 is also known as an osziFOX.
-This handheld probe sends its data through a serial port.  It samples
-one channel at 6-bits up to 20 MS/s with 128 samples of memory.  Real
-voltages are labeled in sample ranges from 1 volt to 100 volts.  If a
-ProbeScope is detected, it is connected to the A input.
-
-.TP 0.5i
-.B Bitscope
-Bitscope (www.bitscope.com) is a mixed-signal capture engine which is
-accessed through a serial port.  It simultaneously samples a digital
-8-bit port and two analog channels at 8 bit resolution at up to 25
-MS/s or more.  If detected, Channel A and B are connected to X and Y
-while the Logic Analyzer is connected to C.
-Bitscope support is currently under development and not yet fully
-functional.
-.P
-
-.TP 0.5i
 .B COMEDI
 The COMEDI project (www.comedi.org) develops Linux drivers, tools, and
 libraries for data acquisition.
 Many commercially available ADC cards are supported by COMEDI, and
 .B Xoscope
 can receive signals from them via the COMEDI library.
-
-See the
-.B -x
-and
-.B -z
-options and the
-.B ENVIRONMENT
-section below for more details on how the above devices are detected.
-Some of the controls below apply only to the sound card and are
-labeled as such.
-.B Xoscope
-has no physical control over the ProbeScope/osziFOX which is
-controlled by its own switches and built-in menus.  Please refer to
-your ProbeScope or osziFOX Owner's Manual for operating instructions.
-Bitscope will eventually be controlled through a separate dialog
-window.
-.P
 
 .PP
 .SH "RUN\-TIME KEYBOARD CONTROLS"
@@ -315,8 +280,8 @@ are 8000, 11025, 22050, or 44100.
 
 .TP 0.5i
 .B -s <scale>
-Time Scale factor from 1/20 to 1000 expressed as a fraction where 1/1
-is 1 ms/div.
+Time Scale factor from 1/500000 to 2000 (2 ns/div - 2 s/div) 
+expressed as a fraction where 1/1 is 1 ms/div.
 
 .TP 0.5i
 .B -t <trigger>
@@ -352,16 +317,6 @@ Whether the graticule is drawn Behind or in front of the signals.
 .TP 0.5i
 .B -v
 Whether the Verbose key help is displayed.
-
-.TP 0.5i
-.B -x
-Whether the sound card input device (XY) is turned on.  This can be
-used to skip the attempt to connect to Esound or /dev/dsp.
-
-.TP 0.5i
-.B -z
-Whether the serial input device (Z) is turned on.  This can be used to
-suppress the search for a serial scope device.
 
 .TP 0.5i
 .B file
@@ -419,18 +374,6 @@ The path to use when looking for external math commands.  If unset,
 the built-in default is used.
 
 .TP 0.5i
-.B PROBESCOPE
-The serial device your ProbeScope or osziFOX is connected to.  If
-unset, /dev/probescope is used.  /dev/probescope could be a symbolic
-link to the real device such as /dev/ttyS1.
-
-.TP 0.5i
-.B BITSCOPE
-The serial device your Bitscope is connected to.  If unset,
-/dev/bitscope is used.  /dev/bitscope could be a symbolic link to the
-real device such as /dev/ttyS1.
-
-.TP 0.5i
 .B ESPEAKER
 The host:port of the EsounD to connect to if built with EsounD
 support.  If unset, localhost is assumed.  If no EsounD connection is
@@ -486,6 +429,7 @@ The keyboard interface may be confusing.
 was written by Tim Witham (twitham@quiknet.com), originally based
 on "scope" by Jeff Tranter (Jeff_Tranter@Mitel.COM).
 Most recent work is by Brent Baccala (cosine@freesoft.org).
+ALSA support by Gerhard Schiller (gerhard.schiller@gmail.com).
 .B Xoscope
 is released under the conditions of the GNU General Public License.
 See the files README and COPYING in the distribution for details.

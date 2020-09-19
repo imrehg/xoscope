@@ -1,3 +1,19 @@
+	NEW for 2.2	Released September 2016
+	===========	=======================
+
+* AppStream support
+
+
+	NEW for 2.1	Released January 2015
+	===========	=====================
+
+* ALSA soundcard support
+
+* Perl functions now supported again
+
+* Bitscope support dropped due to its proprietary interface
+
+
 	NEW for 2.0	Released June 2009
 	===========	==================
 
@@ -16,6 +32,7 @@
 * Improved performance under X Windows
 
 * More modular data source interface
+
 
 	NEW for 1.8	Released May 2001
 	===========	=================

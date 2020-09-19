@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=xoscope
+GenericName=Digital oscilloscope
+Categories=Science;Electronics;Network;HamRadio;Education;
+Exec=xoscope
+Terminal=false
+Icon=xoscope

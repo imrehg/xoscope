@@ -18,8 +18,7 @@ Jeff Tranter <Jeff_Tranter@Mitel.com> for writing the original
 scope-0.1 that inspired all this.
 
 Philip VanBaren <phillipv@eecs.umich.edu> for the realfft.c code from
-his freq program.  If you want a Spectrum Analyzer, you should get
-Philip's freq program and read README.f51.
+his freq program.
 
 The many folks working on the way cool GTK+.
 
@@ -49,3 +48,5 @@ wonderful Programmer's guide.
 
 Ingo Cyliax <cyliax@ezcomm.com> for initial code to work with the
 bitscope.
+
+ALSA support by Gerhard Schiller (gerhard.schiller@gmail.com).

@@ -12,14 +12,6 @@ v1.2: DONE.  Use space bar to select `wait' mode, then the first
 trigger event will `stop' the scope.
 
 
-4	make drawing area mouse aware	(Jeff_Tranter@Mitel.Com)
-
-	Be able to drag signals up and down for example.
-
-v1.6: Under GTK+, left-click will select a channel and right-click
-is a context-sensitive pop-up menu.
-
-
 5	clean up the cluttered screen	(twitham@pcocd2.intel.com)
 
 	Tough to do unless I invent a smarter menu-driven interface.
@@ -264,6 +256,11 @@ after this release.
 v1.6: GTK+ 1.2 or better now required.  The drawing area is now
 context-sensitive to mouse clicks.
 
+30	BitScope support (www.bitscope.com)
+
+	This was done for a while (versions ??), but bitscope's design
+	is too proprietary to continue supporting it.
+
 31	Parallel port support (several people)
 
 	Use the parallel port as a digital input device.  This would
@@ -349,3 +346,8 @@ v2.0: DONE.
 	structure.
 
 v2.0: DONE.  Executable is now 531 KB.
+
+99	completed mini TODOs
+
+	shouldn't lose display information when moving signal up/down
+	put FFT code back in
