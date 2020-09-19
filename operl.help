@@ -1,0 +1,45 @@
+
+	      Arbitrary signal math with Perl functions
+
+Variables available for your function:
+
+$ch1    channel 1 input
+$ch2    channel 2 input
+$out    output: '$out = ' is assumed before your function; don't use $out
+@ch1    channel 1 "memory", $ch1[0] = previous sample, $ch1[1] = one before that
+@ch2    channel 2 "memory",         ... all the way to sample length
+@out    output "memory", $out[0] = previous function output calculation, ...
+$t      sample number, or "time", 0=left edge or trigger point
+$pi     a constant: 3.14159265359, for your trigonometric convenience
+
+                          Example functions
+
+Functions of channel 1 (would also work for channel 2):
+
+abs($ch1)                       # rectify (absolute value)
+-$ch1                           # negate (invert)
+$ch1 - $ch1[0]                  # integral or rate of change since last sample
+$ch1 - $ch1[2]                  # same but over more time (3 sample periods)
+$ch1 + 32                       # add a "DC offset" of 32 sample units
+$t > 43 ? $ch1[43] : 0          # delay by 1 msec @ 44000 S/s = 44th sample
+
+Functions of both channel 1 and channel 2:
+
+$ch1 * $ch2                     # multiply 1 * 2
+$ch1 / ($ch2 || 1)              # divide 1 / 2, avoiding divide by 0 error
+$ch2 / ($ch1 || 1)              # divide 2 / 1
+$ch1 > $ch2 ? $ch1 : $ch2       # max(1, 2)
+$ch1 < $ch2 ? $ch1 : $ch2       # min(1, 2)
+$ch1 + $ch2                     # sum, like the oscope builtin
+$ch1 - $ch2                     # diff, like the oscope builtin
+($ch1 + $ch2) / 2               # average, like the oscope builtin
+
+Time position ($t) functions, independent of channel 1 and 2 inputs:
+
+$t / 88 % 2 ? 64 : -64          #  250 Hz square wave (88 = 44000 / 2 /  250)
+sin($t * $pi / 44) * 64         #  500 Hz    sin wave (44 = 44000 / 2 /  500)
+cos($t * $pi / 22) * 64         # 1000 Hz cosine wave (22 = 44000 / 2 / 1000)
+
+Low-pass filter: a difference equation of previous input and output:
+
+1.899105 * $out[0] - .901531 * $out[1] + .001213 * ($ch1 + $ch1[1] + 2 * $ch1[0])

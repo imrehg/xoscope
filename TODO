@@ -29,6 +29,15 @@ still need to be fixed to avoid overflow
 	This only applies at slower sweep speeds, right?  See #23.
 
 
+4	make drawing area mouse aware	(Jeff_Tranter@Mitel.Com)
+
+	Be able to drag signals up and down for example.
+
+v1.6: Under GTK+, left-click will select a channel and right-click
+is a context-sensitive pop-up menu.
+
+v2.0: This is broken
+
 7	smarter maximum sample rate	(twitham@pcocd2.intel.com)
 
 	If your sound card can do greater than 44kHz, oscope won't
@@ -110,50 +119,6 @@ v1.4: The display now works with rates up to 20,000,000 S/s.
 v1.8: The display now works with rates up to at least 25,000,000 S/s.
 
 
-30	BitScope support (www.bitscope.com)
-
-	I plan to write this in the year 2000 when I will finally have
-	time.
-
-v1.8: Well, 2000 blew by and I never got it done due to an unexpected
-life outside of computers.  So I won't put a date on it now.
-
-	The BitScope is a "Mixed Signal Capture Engine."  Way cool
-	programmable hardware that aquires data and makes it available
-	through a serial port.  With its 2 analog channels and 8
-	digital, it has the potential to turn xoscope into a real
-	combined digital scope and logic analyzer at up to 100 MHz!
-	My rough initial plan of attack is:
-
-	+ 2 way serial communications to the device
-
-	+ modularized programming and I/O functions
-
-	+ a new channel display mode that instead of drawing one
-	analog line draws 8 digital ones.  This way the existing
-	buffer memory capabilities will work for the LA too.
-
-v1.7: This display mode is now available; hit ` or ~ to change the
-number of bits displayed.
-
-	+ the keyboard interface may need replaced with some sort of
-	on-screen menu system to organize the many features, similar
-	to the menus of real DSOs.
-
-	+ this likely will be a separate configuration at build-time,
-	completely separate from soundcard and probeScope devices
-	since the hardware is so much more sophistocated.  In other
-	words, it will produce a separate program, for BitScope only.
-
-v1.8: Actually, now I think not.  But it will require GTK+ for a
-decent user interface.  I have used Glade to build a control dialog
-and believe this will work nicely.
-
-	Obviously this will not be trivial but will be very well worth
-	the effort.  Sorry I never had time to do it yet.  I am still
-	looking forward to using BitScope with xoscope on Linux.
-
-
 32	Improved display handling
 
 	Right now, the graticule (display grid) is re-drawn every time
@@ -198,10 +163,20 @@ and believe this will work nicely.
 	with digital triggering sources?
 
 
+38	X-Y mode
+
+39	Fix problems relating to signalline/display code
+
+	What to do with history when settings like analog/digital are changed?
+
+	We want the changes to be 'undo'able, but it doesn't really make
+	sense to keep the history around - does it?
+
+	Figuring out cursor data values
+
 99	mini TODOs
 
 	new defaults - default device, default min update interval
-	Bitscope dialog - test it and finish it
 	memory utilization
 	figure out how to use stock buttons on Glade dialogs
 	count.dat
@@ -211,7 +186,6 @@ and believe this will work nicely.
 	investigate RTAI scheduling issues - how badly do we need anti-jitter?
 	ability to resize to a small(er) window
 	COMEDI gain control
-	shouldn't lose display information when moving signal up/down
 	time scale normalization - when it's done and how
 	noise causing false triggers on 16-bit data sources
 	should we note clipping?  older versions did
@@ -219,3 +193,16 @@ and believe this will work nicely.
 	make sure -m option works (screen size)
 	cursors - should always show same voltage left/right
 	cursors - move around if sampling rate on active channel changes
+	fix GTK widgets so they don't keep "wiggling around"
+	allow user to specify an rc file
+	maintain scrollbar position on timebase change
+	save entire display state on a file save
+	import/export signals in standard formats
+	better job of handling slow timebases
+	improve FFT code
+	fix value-to-pixel roundoff problems in gtkdatabox
+	COMEDI range control
+	ALSA number of channels; rate logic
+	handle wide text boxes on long external commands
+	better handle external commands with variable time bases
+	don't open/close soundcard so much

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+<id>net.sourceforge.xoscope</id>
+<metadata_license>GPL-2.0</metadata_license>
+<project_license>GPL-2.0</project_license>
+<name>Xoscope</name>
+<summary>Digital Storage Oscilloscope</summary>
+
+<description>
+  <p>
+    xoscope collects real-time data from either the soundcard or data
+    acquisition cards and presents it in an X Window oscilloscope
+    display.
+  </p>
+</description>
+
+<url type="homepage">http://xoscope.sourceforge.net/</url>
+<icon type="remote" width="128" height="128">http://xoscope.sf.net/xoscope-icon-128x128.png</icon>
+
+<screenshots>
+  <screenshot type="default">
+    <image>http://xoscope.sourceforge.net/xoscope-2.1.png</image>
+  </screenshot>
+</screenshots>
+
+<releases>
+  <release version="2.2" date="2016-09-15" urgency="low">
+    <description>
+      <ul>
+	<li>AppStream support</li>
+      </ul>
+    </description>
+  </release>
+  <release version="2.1" date="2015-02-11">
+    <description>
+      <ul>
+	<li>ALSA soundcard support</li>
+	<li>Math functions re-introduced</li>
+      </ul>
+    </description>
+  </release>
+</releases>
+
+<provides>
+  <modalias>pci:v0000144ad00006208*</modalias>
+  <modalias>pci:v0000144Ad00006208*</modalias>
+  <modalias>pci:v0000144Ad00007296*</modalias>
+  <modalias>pci:v0000144Ad00007432*</modalias>
+  <modalias>pci:v0000144Ad00008164*</modalias>
+  <modalias>pci:v0000144Ad00009111*</modalias>
+  <modalias>pci:v000010E8d000080D7*</modalias>
+  <modalias>pci:v000010E8d000080D9*</modalias>
+  <modalias>pci:v000013FEd00001710*</modalias>
+  <modalias>pci:v000013FEd00001711*</modalias>
+  <modalias>pci:v000013FEd00001713*</modalias>
+  <modalias>pci:v000013FEd00001720*</modalias>
+  <modalias>pci:v000013FEd00001731*</modalias>
+  <modalias>pci:v000013FEd00001723*</modalias>
+  <modalias>pci:v000013FEd00001730*</modalias>
+  <modalias>pci:v000013FEd00001733*</modalias>
+  <modalias>pci:v000013FEd00001734*</modalias>
+  <modalias>pci:v000013FEd00001735*</modalias>
+  <modalias>pci:v000013FEd00001736*</modalias>
+  <modalias>pci:v000013FEd00001739*</modalias>
+  <modalias>pci:v000013FEd00001750*</modalias>
+  <modalias>pci:v000013FEd00001751*</modalias>
+  <modalias>pci:v000013FEd00001752*</modalias>
+  <modalias>pci:v000013FEd00001753*</modalias>
+  <modalias>pci:v000013FEd00001754*</modalias>
+  <modalias>pci:v000013FEd00001756*</modalias>
+  <modalias>pci:v000013FEd00001760*</modalias>
+  <modalias>pci:v000013FEd00001762*</modalias>
+  <modalias>pci:v000013FEd00001730*</modalias>
+  <modalias>pci:v000013FEd00001733*</modalias>
+  <modalias>pci:v000013FEd00001734*</modalias>
+  <modalias>pci:v000013FEd00001735*</modalias>
+  <modalias>pci:v000013FEd00001736*</modalias>
+  <modalias>pci:v000013FEd00001739*</modalias>
+  <modalias>pci:v000013FEd00001750*</modalias>
+  <modalias>pci:v000013FEd00001751*</modalias>
+  <modalias>pci:v000013FEd00001752*</modalias>
+  <modalias>pci:v000013FEd00001753*</modalias>
+  <modalias>pci:v000013FEd00001753*</modalias>
+  <modalias>pci:v000013FEd00001754*</modalias>
+  <modalias>pci:v000013FEd00001756*</modalias>
+  <modalias>pci:v000013FEd00001760*</modalias>
+  <modalias>pci:v000013FEd00001762*</modalias>
+  <modalias>pci:v000014DCd0000000B*</modalias>
+  <modalias>pci:v000014DCd0000000A*</modalias>
+  <modalias>pci:v000014DCd00000011*</modalias>
+  <modalias>pci:v000014DCd00000012*</modalias>
+  <modalias>pci:v000014DCd00000014*</modalias>
+  <modalias>pci:v000014DCd00000009*</modalias>
+  <modalias>pci:v000014DCd0000000C*</modalias>
+  <modalias>pci:v000014DCd00000007*</modalias>
+  <modalias>pci:v000014DCd00000008*</modalias>
+  <modalias>pci:v000014DCd00000000*</modalias>
+  <modalias>pci:v000014DCd00000006*</modalias>
+  <modalias>pci:v00001307d00000070*</modalias>
+  <modalias>pci:v00001307d00000071*</modalias>
+  <modalias>pci:v00001307d0000001D*</modalias>
+  <modalias>pci:v00001307d0000001E*</modalias>
+  <modalias>pci:v00001307d00000035*</modalias>
+  <modalias>pci:v00001307d00000036*</modalias>
+  <modalias>pci:v00001307d00000037*</modalias>
+  <modalias>pci:v00001307d00000052*</modalias>
+  <modalias>pci:v00001307d0000005D*</modalias>
+  <modalias>pci:v00001307d0000005E*</modalias>
+  <modalias>pci:v00001307d0000005F*</modalias>
+  <modalias>pci:v00001307d00000061*</modalias>
+  <modalias>pci:v00001307d00000062*</modalias>
+  <modalias>pci:v00001307d00000063*</modalias>
+  <modalias>pci:v00001307d00000064*</modalias>
+  <modalias>pci:v00001307d00000066*</modalias>
+  <modalias>pci:v00001307d00000067*</modalias>
+  <modalias>pci:v00001307d00000068*</modalias>
+  <modalias>pci:v00001307d0000006F*</modalias>
+  <modalias>pci:v00001307d00000078*</modalias>
+  <modalias>pci:v00001307d00000079*</modalias>
+  <modalias>pci:v00001307d00000001*</modalias>
+  <modalias>pci:v00001307d0000000F*</modalias>
+  <modalias>pci:v00001307d00000010*</modalias>
+  <modalias>pci:v00001307d00000019*</modalias>
+  <modalias>pci:v00001307d0000001C*</modalias>
+  <modalias>pci:v00001307d0000004C*</modalias>
+  <modalias>pci:v00001307d0000001A*</modalias>
+  <modalias>pci:v00001307d0000001B*</modalias>
+  <modalias>pci:v00001307d00000020*</modalias>
+  <modalias>pci:v00001307d00000021*</modalias>
+  <modalias>pci:v00001307d00000022*</modalias>
+  <modalias>pci:v00001307d00000023*</modalias>
+  <modalias>pci:v00001307d00000024*</modalias>
+  <modalias>pci:v00001307d00000025*</modalias>
+  <modalias>pci:v00001307d00000028*</modalias>
+  <modalias>pci:v00001307d00000014*</modalias>
+  <modalias>pci:v00001307d0000000B*</modalias>
+  <modalias>pci:v00001307d00000056*</modalias>
+  <modalias>pci:v00001307d00000115*</modalias>
+  <modalias>pci:v00001307d00000053*</modalias>
+  <modalias>pci:v00001307d00000029*</modalias>
+  <modalias>pci:v00001221d00008172*</modalias>
+  <modalias>pci:v00001116d00000022*</modalias>
+  <modalias>pci:v00001116d00000027*</modalias>
+  <modalias>pci:v00001116d00000023*</modalias>
+  <modalias>pci:v00001116d00000024*</modalias>
+  <modalias>pci:v00001116d00000028*</modalias>
+  <modalias>pci:v00001116d00000025*</modalias>
+  <modalias>pci:v00001116d00000026*</modalias>
+  <modalias>pci:v000010B5d00009080*</modalias>
+  <modalias>pci:v00001762d00003111*</modalias>
+  <modalias>pci:v00001762d00003112*</modalias>
+  <modalias>pci:v00001762d00003113*</modalias>
+  <modalias>pci:v00001762d00003114*</modalias>
+  <modalias>pci:v00001001d00000014*</modalias>
+  <modalias>pci:v00001402d00004650*</modalias>
+  <modalias>pci:v00001402d00004660*</modalias>
+  <modalias>pci:v00001402d00004661*</modalias>
+  <modalias>pci:v00001402d00004662*</modalias>
+  <modalias>pci:v00001402d00004663*</modalias>
+  <modalias>pci:v00001402d00004670*</modalias>
+  <modalias>pci:v00001402d00004671*</modalias>
+  <modalias>pci:v00001402d00004672*</modalias>
+  <modalias>pci:v00001402d00004673*</modalias>
+  <modalias>pci:v00001402d00004680*</modalias>
+  <modalias>pci:v00001402d00004681*</modalias>
+  <modalias>pci:v00001402d00004682*</modalias>
+  <modalias>pci:v00001402d00004683*</modalias>
+  <modalias>pci:v00001402d00002600*</modalias>
+  <modalias>pci:v00001402d00002000*</modalias>
+  <modalias>pci:v00001093d00002B10*</modalias>
+  <modalias>pci:v00001093d00002B20*</modalias>
+  <modalias>pci:v00001093d00001710*</modalias>
+  <modalias>pci:v00001093d00007085*</modalias>
+  <modalias>pci:v00001093d00007086*</modalias>
+  <modalias>pci:v00001093d00007087*</modalias>
+  <modalias>pci:v00001093d00007088*</modalias>
+  <modalias>pci:v00001093d000070A9*</modalias>
+  <modalias>pci:v00001093d000070C3*</modalias>
+  <modalias>pci:v00001093d000070C8*</modalias>
+  <modalias>pci:v00001093d000070C9*</modalias>
+  <modalias>pci:v00001093d000070CC*</modalias>
+  <modalias>pci:v00001093d000070CD*</modalias>
+  <modalias>pci:v00001093d000070D1*</modalias>
+  <modalias>pci:v00001093d000070D2*</modalias>
+  <modalias>pci:v00001093d000070D3*</modalias>
+  <modalias>pci:v00001093d00007124*</modalias>
+  <modalias>pci:v00001093d00007125*</modalias>
+  <modalias>pci:v00001093d00007126*</modalias>
+  <modalias>pci:v00001093d00007127*</modalias>
+  <modalias>pci:v00001093d00007128*</modalias>
+  <modalias>pci:v00001093d0000718B*</modalias>
+  <modalias>pci:v00001093d0000718C*</modalias>
+  <modalias>pci:v00001093d000071C5*</modalias>
+  <modalias>pci:v00001093d00002C60*</modalias>
+  <modalias>pci:v00001093d00001310*</modalias>
+  <modalias>pci:v00001093d00001360*</modalias>
+  <modalias>pci:v00001093d00002CC0*</modalias>
+  <modalias>pci:v00001093d00001E40*</modalias>
+  <modalias>pci:v00001093d00002C90*</modalias>
+  <modalias>pci:v00001093d00001920*</modalias>
+  <modalias>pci:v00001093d00001290*</modalias>
+  <modalias>pci:v00001093d00000161*</modalias>
+  <modalias>pci:v00001093d00001150*</modalias>
+  <modalias>pci:v00001093d00001320*</modalias>
+  <modalias>pci:v00001093d000012B0*</modalias>
+  <modalias>pci:v00001093d00000160*</modalias>
+  <modalias>pci:v00001093d00001630*</modalias>
+  <modalias>pci:v00001093d000013C0*</modalias>
+  <modalias>pci:v00001093d00000400*</modalias>
+  <modalias>pci:v00001093d00001250*</modalias>
+  <modalias>pci:v00001093d000017D0*</modalias>
+  <modalias>pci:v00001093d00001800*</modalias>
+  <modalias>pci:v00001093d00000162*</modalias>
+  <modalias>pci:v00001093d00001170*</modalias>
+  <modalias>pci:v00001093d00001180*</modalias>
+  <modalias>pci:v00001093d00001190*</modalias>
+  <modalias>pci:v00001093d000011B0*</modalias>
+  <modalias>pci:v00001093d000011C0*</modalias>
+  <modalias>pci:v00001093d000011D0*</modalias>
+  <modalias>pci:v00001093d00001270*</modalias>
+  <modalias>pci:v00001093d00001330*</modalias>
+  <modalias>pci:v00001093d00001340*</modalias>
+  <modalias>pci:v00001093d00001350*</modalias>
+  <modalias>pci:v00001093d000014E0*</modalias>
+  <modalias>pci:v00001093d000014F0*</modalias>
+  <modalias>pci:v00001093d00001580*</modalias>
+  <modalias>pci:v00001093d000015B0*</modalias>
+  <modalias>pci:v00001093d00001870*</modalias>
+  <modalias>pci:v00001093d00001880*</modalias>
+  <modalias>pci:v00001093d000018B0*</modalias>
+  <modalias>pci:v00001093d000018C0*</modalias>
+  <modalias>pci:v00001093d00002410*</modalias>
+  <modalias>pci:v00001093d00002420*</modalias>
+  <modalias>pci:v00001093d00002430*</modalias>
+  <modalias>pci:v00001093d00002890*</modalias>
+  <modalias>pci:v00001093d000028C0*</modalias>
+  <modalias>pci:v00001093d00002A60*</modalias>
+  <modalias>pci:v00001093d00002A70*</modalias>
+  <modalias>pci:v00001093d00002A80*</modalias>
+  <modalias>pci:v00001093d00002AB0*</modalias>
+  <modalias>pci:v00001093d00002B80*</modalias>
+  <modalias>pci:v00001093d00002B90*</modalias>
+  <modalias>pci:v00001093d00002C80*</modalias>
+  <modalias>pci:v00001093d00002CA0*</modalias>
+  <modalias>pci:v00001093d000070AA*</modalias>
+  <modalias>pci:v00001093d000070AB*</modalias>
+  <modalias>pci:v00001093d000070AC*</modalias>
+  <modalias>pci:v00001093d000070AD*</modalias>
+  <modalias>pci:v00001093d000070AF*</modalias>
+  <modalias>pci:v00001093d000070B0*</modalias>
+  <modalias>pci:v00001093d000070B4*</modalias>
+  <modalias>pci:v00001093d000070B6*</modalias>
+  <modalias>pci:v00001093d000070B7*</modalias>
+  <modalias>pci:v00001093d000070B8*</modalias>
+  <modalias>pci:v00001093d000070BC*</modalias>
+  <modalias>pci:v00001093d000070BD*</modalias>
+  <modalias>pci:v00001093d000070BF*</modalias>
+  <modalias>pci:v00001093d000070C0*</modalias>
+  <modalias>pci:v00001093d000070F2*</modalias>
+  <modalias>pci:v00001093d000070F3*</modalias>
+  <modalias>pci:v00001093d0000710D*</modalias>
+  <modalias>pci:v00001093d0000716C*</modalias>
+  <modalias>pci:v00001093d0000716D*</modalias>
+  <modalias>pci:v00001093d0000717D*</modalias>
+  <modalias>pci:v00001093d0000717F*</modalias>
+  <modalias>pci:v00001093d000071BC*</modalias>
+  <modalias>pci:v00001093d000072E8*</modalias>
+  <modalias>pci:v00001435d00007520*</modalias>
+  <modalias>pci:v00001435d00004520*</modalias>
+  <modalias>pci:v00001131d00007146*</modalias>
+  <modalias>pci:v0000DAFEd00000100*</modalias>
+  <modalias>pci:v0000DAFEd00000200*</modalias>
+  <modalias>pcmcia:m01C5c0039*</modalias>
+  <modalias>pcmcia:m01C5c4009*</modalias>
+  <modalias>pcmcia:m01C5c4001*</modalias>
+  <modalias>pcmcia:m010Bc4743*</modalias>
+  <modalias>pcmcia:m010Bc475C*</modalias>
+  <modalias>pcmcia:m010Bc0103*</modalias>
+  <modalias>pcmcia:m010Bc010D*</modalias>
+  <modalias>pcmcia:m010Bc010C*</modalias>
+  <modalias>pcmcia:m010Bc02C4*</modalias>
+  <modalias>pcmcia:m010Bc075E*</modalias>
+  <modalias>pcmcia:m010Bc0245*</modalias>
+  <modalias>pcmcia:m0137c0027*</modalias>
+</provides>
+
+</component>
